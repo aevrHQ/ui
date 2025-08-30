@@ -1,5 +1,5 @@
 {
-  "$schema": "https://v1.ui.aevr.space/schema/registry-item.json",
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
   "name": "example-with-css",
   "type": "registry:component",
   "title": "Example with CSS",

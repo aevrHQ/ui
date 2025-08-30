@@ -12,7 +12,8 @@
       "files": [
         {
           "path": "registry/new-york/blocks/hello-world/hello-world.tsx",
-          "type": "registry:component"
+          "type": "registry:component",
+          "target": "components/ui/aevr/button.tsx"
         }
       ]
     },
