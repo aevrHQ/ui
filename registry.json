@@ -1,8 +1,20 @@
 {
-  "$schema": "https://ui.shadcn.com/schema/registry.json",
+  "$schema": "https://v1.ui.aevr.space/schema/registry.json",
   "name": "acme",
   "homepage": "https://acme.com",
   "items": [
+    {
+      "name": "button",
+      "type": "registry:component",
+      "title": "Button",
+      "description": "A simple button component",
+      "files": [
+        {
+          "path": "registry/lagos/ui/button.tsx",
+          "type": "registry:component"
+        }
+      ]
+    },
     {
       "name": "hello-world",
       "type": "registry:component",

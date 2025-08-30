@@ -1,12 +1,10 @@
 {
-  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "$schema": "https://v1.ui.aevr.space/schema/registry-item.json",
   "name": "complex-component",
   "type": "registry:component",
   "title": "Complex Component",
   "description": "A complex component showing hooks, libs and components.",
-  "registryDependencies": [
-    "card"
-  ],
+  "registryDependencies": ["card"],
   "files": [
     {
       "path": "registry/new-york/blocks/complex-component/page.tsx",

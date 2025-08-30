@@ -1,5 +1,5 @@
 {
-  "$schema": "https://ui.shadcn.com/schema/registry.json",
+  "$schema": "https://v1.ui.aevr.space/schema/registry.json",
   "name": "acme",
   "homepage": "https://acme.com",
   "items": [

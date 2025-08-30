@@ -1,9 +1,9 @@
-import * as React from "react"
-import { OpenInV0Button } from "@/components/open-in-v0-button"
-import { HelloWorld } from "@/registry/new-york/blocks/hello-world/hello-world"
-import { ExampleForm } from "@/registry/new-york/blocks/example-form/example-form"
-import PokemonPage from "@/registry/new-york/blocks/complex-component/page"
-import { ExampleCard } from "@/registry/new-york/blocks/example-with-css/example-card"
+import * as React from "react";
+import { OpenInV0Button } from "@/components/open-in-v0-button";
+import { ExampleForm } from "@/registry/new-york/blocks/example-form/example-form";
+import PokemonPage from "@/registry/new-york/blocks/complex-component/page";
+import { ExampleCard } from "@/registry/new-york/blocks/example-with-css/example-card";
+import { InfoBox } from "@/registry/lagos/ui/info-box";
 // This page displays items from the custom registry.
 // You are free to implement this with your own design as needed.
 
@@ -25,7 +25,17 @@ export default function Home() {
             <OpenInV0Button name="hello-world" className="w-fit" />
           </div>
           <div className="flex items-center justify-center min-h-[400px] relative">
-            <HelloWorld />
+            <InfoBox
+              type="success"
+              title="Success!"
+              description="Operation completed successfully"
+              actions={[
+                {
+                  name: "Continue",
+                  type: "primary",
+                },
+              ]}
+            />
           </div>
         </div>
 
@@ -66,5 +76,5 @@ export default function Home() {
         </div>
       </main>
     </div>
-  )
+  );
 }

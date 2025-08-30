@@ -1,5 +1,6 @@
 @import "tailwindcss";
 @import "tw-animate-css";
+@import "tailwindcss";
 
 @custom-variant dark (&:is(.dark *));
 
@@ -41,6 +42,33 @@
   --radius-md: calc(var(--radius) - 2px);
   --radius-lg: var(--radius);
   --radius-xl: calc(var(--radius) + 4px);
+
+  /* AEVR UI Custom Colors */
+  --color-tw-payred-50: oklch(0.985 0.01 27);
+  --color-tw-payred-100: oklch(0.97 0.02 27);
+  --color-tw-payred-200: oklch(0.94 0.04 27);
+  --color-tw-payred-300: oklch(0.88 0.08 27);
+  --color-tw-payred-400: oklch(0.78 0.14 27);
+  --color-tw-payred-500: oklch(0.66 0.2 27);
+  --color-tw-payred-600: oklch(0.58 0.22 27);
+  --color-tw-payred-700: oklch(0.48 0.18 27);
+  --color-tw-payred-800: oklch(0.38 0.14 27);
+  --color-tw-payred-900: oklch(0.32 0.12 27);
+  --color-tw-payred-950: oklch(0.18 0.06 27);
+
+  --color-modernblack-02: oklch(0.96 0 0);
+  --color-modernblack-03: oklch(0.92 0 0);
+  --color-modernblack-06: oklch(0.85 0 0);
+  --color-modernblack-03-60: oklch(0.92 0 0 / 60%);
+
+  --color-darkMode-300: oklch(0.75 0 0);
+  --color-darkMode-600: oklch(0.45 0 0);
+  --color-darkMode-800: oklch(0.25 0 0);
+  --color-darkMode-900: oklch(0.18 0 0);
+  --color-darkMode-950: oklch(0.12 0 0);
+
+  --color-tw-modernblack-800: oklch(0.25 0 0);
+  --color-tw-modernblack-50: oklch(0.98 0 0);
 }
 
 :root {
@@ -118,5 +146,126 @@
   }
   body {
     @apply bg-background text-foreground;
+  }
+}
+
+@layer components {
+  /* Enhanced Button and Tag Styles */
+  .btn {
+    @apply inline-flex w-fit transform cursor-pointer items-center justify-center gap-2 rounded-xl bg-tw-payred-500 p-2 px-4 font-medium text-tw-payred-50 transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-tw-payred-500 focus:ring-offset-2 focus:ring-offset-white active:scale-95 dark:focus:ring-offset-tw-modernblack-800;
+    @apply disabled:cursor-not-allowed disabled:opacity-50 disabled:brightness-90 disabled:active:scale-100;
+  }
+
+  /* Primary Button (default) */
+  .btn.primary {
+    @apply bg-tw-payred-500 text-tw-payred-50 hover:bg-tw-payred-600 dark:bg-tw-payred-600 dark:hover:bg-tw-payred-700;
+    @apply focus:ring-tw-payred-500 dark:focus:ring-tw-payred-600;
+  }
+
+  /* Secondary Button */
+  .btn.secondary {
+    @apply border border-modernblack-03-60 bg-modernblack-02 text-modernblack-06 hover:bg-modernblack-03 dark:border-darkMode-800 dark:bg-darkMode-950 dark:text-darkMode-300 dark:hover:bg-darkMode-900;
+    @apply focus:ring-modernblack-06 dark:focus:ring-darkMode-600 dark:focus:ring-offset-tw-modernblack-800;
+  }
+
+  /* Tertiary Button */
+  .btn.tertiary {
+    @apply bg-tw-payred-100 text-tw-payred-600 hover:bg-tw-payred-200 dark:bg-tw-payred-800 dark:text-tw-payred-200 dark:hover:bg-tw-payred-700;
+    @apply focus:ring-tw-payred-500 dark:focus:ring-tw-payred-600;
+  }
+
+  /* Ghost Button */
+  .btn.ghost {
+    @apply bg-transparent text-tw-payred-600 hover:bg-tw-payred-50 dark:text-tw-payred-400 dark:hover:bg-tw-payred-950/50;
+    @apply focus:ring-tw-payred-500 dark:focus:ring-tw-payred-600;
+  }
+
+  /* Danger Button */
+  .btn.danger {
+    @apply bg-red-500 text-red-50 hover:bg-red-600 dark:bg-red-600 dark:hover:bg-red-700;
+    @apply focus:ring-red-500 dark:focus:ring-red-600;
+  }
+
+  /* Variant-specific button styles for better integration */
+  .btn.warning-variant {
+    @apply bg-yellow-500 text-yellow-50 hover:bg-yellow-600 dark:bg-yellow-600 dark:hover:bg-yellow-700;
+    @apply focus:ring-yellow-500 dark:focus:ring-yellow-600;
+  }
+
+  .btn.success-variant {
+    @apply bg-green-500 text-green-50 hover:bg-green-600 dark:bg-green-600 dark:hover:bg-green-700;
+    @apply focus:ring-green-500 dark:focus:ring-green-600;
+  }
+
+  .btn.info-variant {
+    @apply bg-blue-500 text-blue-50 hover:bg-blue-600 dark:bg-blue-600 dark:hover:bg-blue-700;
+    @apply focus:ring-blue-500 dark:focus:ring-blue-600;
+  }
+
+  .btn.error-variant {
+    @apply bg-red-500 text-red-50 hover:bg-red-600 dark:bg-red-600 dark:hover:bg-red-700;
+    @apply focus:ring-red-500 dark:focus:ring-red-600;
+  }
+
+  /* Icon positioning adjustments */
+  .btn:has(.icon:first-child) {
+    @apply pl-2;
+  }
+  .btn:has(.icon:last-child) {
+    @apply pr-2;
+  }
+  .btn:has(.icon:first-child + *:last-child) {
+    @apply pr-3;
+  }
+
+  /* Button sizes */
+  .btn.sm {
+    @apply px-2 py-1.5 text-sm;
+  }
+  .btn.sm .icon {
+    @apply h-4 w-4;
+  }
+  .btn.sm:has(.icon:first-child) {
+    @apply pl-1.5;
+  }
+  .btn.sm:has(.icon:last-child) {
+    @apply pr-1.5;
+  }
+
+  .btn.md {
+    @apply px-3 py-2 text-base;
+  }
+  .btn.md .icon {
+    @apply h-5 w-5;
+  }
+  .btn.md:has(.icon:first-child) {
+    @apply pl-2;
+  }
+  .btn.md:has(.icon:last-child) {
+    @apply pr-2;
+  }
+
+  .btn.lg {
+    @apply px-6 py-3 text-xl;
+  }
+  .btn.lg .icon {
+    @apply h-7 w-7;
+  }
+  .btn.lg:has(.icon:first-child) {
+    @apply pl-4;
+  }
+  .btn.lg:has(.icon:last-child) {
+    @apply pr-4;
+  }
+
+  /* Icon base styles */
+  .icon {
+    @apply h-6 w-6 shrink-0 text-current;
+  }
+  .icon.lg {
+    @apply h-8 w-8;
+  }
+  .icon.sm {
+    @apply h-4 w-4;
   }
 }
