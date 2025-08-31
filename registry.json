@@ -21,6 +21,7 @@
       "type": "registry:component",
       "title": "Info Box",
       "description": "A simple info box component for displaying information, warnings, errors, loading states, and status messages.",
+      "registryDependencies": ["button", "loader"],
       "files": [
         {
           "path": "registry/lagos/ui/info-box.tsx",

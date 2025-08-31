@@ -13,7 +13,7 @@ import Link from "next/link";
 import React, { FC, ReactNode } from "react";
 import { cva, type VariantProps } from "class-variance-authority";
 import { cn } from "@/lib/utils";
-import { Button } from "./button";
+import { Button } from "@/registry/lagos/ui/button";
 import Loader from "@/registry/lagos/ui/loader";
 
 // Types for InfoBox
