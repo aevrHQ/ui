@@ -30,6 +30,19 @@
       ]
     },
     {
+      "name": "loader",
+      "type": "registry:component",
+      "title": "Loader",
+      "description": "A simple loader component for displaying loading states.",
+      "files": [
+        {
+          "path": "registry/lagos/ui/loader.tsx",
+          "type": "registry:component",
+          "target": "components/ui/aevr/loader.tsx"
+        }
+      ]
+    },
+    {
       "name": "hello-world",
       "type": "registry:component",
       "title": "Hello World",
