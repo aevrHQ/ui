@@ -1,23 +1,33 @@
-# registry-template
+# Aevr UI Registry
 
-You can use the `shadcn` CLI to run your own component registry. Running your own
-component registry allows you to distribute your custom components, hooks, pages, and
-other files to any React project.
+## Installation with Namespace
 
-> [!IMPORTANT]  
-> This template uses Tailwind v4. For Tailwind v3, see [registry-template](https://github.com/shadcn-ui/registry-template).
+To use the Aevr UI registry with namespace support, add the following configuration to your `components.json` file:
 
-## Getting Started
+```json
+{
+  "registries": {
+    "@aevr": "https://v1.ui.aevr.space/r/{name}.json"
+  }
+}
+```
 
-This is a template for creating a custom registry using Next.js.
+Then install components using the namespace:
 
-- The template uses a `registry.json` file to define components and their files.
-- The `shadcn build` command is used to build the registry.
-- The registry items are served as static files under `public/r/[name].json`.
-- The template also includes a route handler for serving registry items.
-- Every registry item are compatible with the `shadcn` CLI.
-- We have also added v0 integration using the `Open in v0` api.
+```bash
+npx shadcn@latest add @aevr/info-box
+npx shadcn@latest add @aevr/button
+npx shadcn@latest add @aevr/card
+```
 
-## Documentation
+## Available Components
 
-Visit the [shadcn documentation](https://v1.ui.aevr.space/docs/registry) to view the full documentation.
+You can view all available components at: <https://v1.ui.aevr.space>
+
+## Alternative Installation
+
+You can also install components directly using the full URL:
+
+```bash
+npx shadcn@latest add https://v1.ui.aevr.space/r/info-box.json
+```
