@@ -1,0 +1,45 @@
+{
+  "css.customData": [".vscode/css_custom_data.json"],
+  "tailwindCSS.experimental.classRegex": [
+    // CVA base styles (first parameter) - improved regex
+    ["cva\\(\\s*[\"'`]([^\"'`]*)[\"'`]", "$1"],
+
+    // CVA variant styles (inside variant objects) - more specific
+    [
+      "cva\\([^,]*,\\s*{[^}]*variants:\\s*{[^}]*}[^}]*}\\)",
+      "[\"'`]([^\"'`]*)[\"'`]"
+    ],
+
+    // Alternative CVA variant matching for nested objects
+    ["(?:variants|compoundVariants)\\s*:\\s*{[^}]*}", "[\"'`]([^\"'`]*)[\"'`]"],
+
+    // cn() function calls
+    ["cn\\(([^)]*)\\)", "[\"'`]([^\"'`]*)[\"'`]"],
+
+    // clsx and similar utility functions
+    [
+      "(?:clsx|classnames|twMerge|twJoin)\\(([^)]*)\\)",
+      "[\"'`]([^\"'`]*)[\"'`]"
+    ],
+
+    // Template literals with tw comments
+    ["/\\*\\s*tw\\s*\\*/\\s*[`'\"]([^`'\"]*)[`'\"]", "$1"],
+
+    // tw`` template literals
+    ["tw`([^`]*)`", "$1"],
+
+    // className props in JSX
+    ["className\\s*=\\s*[\"'`]([^\"'`]*)[\"'`]", "$1"],
+
+    // Class attributes in template literals
+    ["class\\s*=\\s*[\"'`]([^\"'`]*)[\"'`]", "$1"]
+  ],
+  "tailwindCSS.includeLanguages": {
+    "typescript": "typescript",
+    "typescriptreact": "typescriptreact"
+  },
+  "editor.quickSuggestions": {
+    "strings": true
+  },
+  "tailwindCSS.classAttributes": ["class", "className", "classList"]
+}
