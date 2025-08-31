@@ -1,3 +1,4 @@
+// ./registry/lagos/ui/info-box.tsx
 "use client";
 
 import {
@@ -10,6 +11,7 @@ import {
 } from "iconsax-react";
 import Link from "next/link";
 import React, { FC, ReactNode } from "react";
+import { cva, type VariantProps } from "class-variance-authority";
 import { cn } from "@/lib/utils";
 import { Button } from "./button";
 import Loader from "@/registry/lagos/ui/loader";
@@ -36,17 +38,209 @@ interface ActionObject {
   custom?: boolean;
 }
 
-interface InfoBoxProps {
+// CVA variants for the main container
+const infoBoxVariants = cva(
+  "relative flex grow flex-wrap items-start border transition-colors duration-200",
+  {
+    variants: {
+      type: {
+        default: "",
+        warning: "",
+        error: "",
+        success: "",
+        info: "",
+        loading: "",
+      },
+      size: {
+        xs: "gap-2 rounded-xl p-2",
+        sm: "gap-3 rounded-2xl p-3",
+        md: "gap-4 rounded-3xl p-5 max-md:flex-col max-md:gap-2 max-md:p-3",
+        lg: "gap-5 rounded-3xl p-6",
+        xl: "gap-6 rounded-3xl p-8",
+        "2xl": "gap-8 rounded-3xl p-10",
+      },
+      colorScheme: {
+        default:
+          "border-gray-200 bg-gray-50 text-gray-900 dark:border-gray-700 dark:bg-gray-950 dark:text-gray-100",
+        full: "",
+      },
+    },
+    compoundVariants: [
+      // Full color scheme variants
+      {
+        type: "warning",
+        colorScheme: "full",
+        className:
+          "bg-yellow-50 dark:bg-yellow-950 border-yellow-200 dark:border-yellow-800 text-yellow-900 dark:text-yellow-100",
+      },
+      {
+        type: "error",
+        colorScheme: "full",
+        className:
+          "bg-red-50 dark:bg-red-950 border-red-200 dark:border-red-800 text-red-900 dark:text-red-100",
+      },
+      {
+        type: "success",
+        colorScheme: "full",
+        className:
+          "bg-green-50 dark:bg-green-950 border-green-200 dark:border-green-800 text-green-900 dark:text-green-100",
+      },
+      {
+        type: "info",
+        colorScheme: "full",
+        className:
+          "bg-blue-50 dark:bg-blue-950 border-blue-200 dark:border-blue-800 text-blue-900 dark:text-blue-100",
+      },
+      {
+        type: "loading",
+        colorScheme: "full",
+        className:
+          "bg-gray-50 dark:bg-gray-950 border-gray-200 dark:border-gray-800 text-gray-900 dark:text-gray-100",
+      },
+      {
+        type: "default",
+        colorScheme: "full",
+        className:
+          "bg-gray-50 dark:bg-gray-950 border-gray-200 dark:border-gray-800 text-gray-900 dark:text-gray-100",
+      },
+    ],
+    defaultVariants: {
+      type: "default",
+      size: "md",
+      colorScheme: "full",
+    },
+  }
+);
+
+// CVA variants for the icon container
+const iconContainerVariants = cva("relative flex items-start justify-center", {
+  variants: {
+    type: {
+      default: "bg-gray-100 dark:bg-gray-800",
+      warning: "bg-yellow-100 dark:bg-yellow-900/20",
+      error: "bg-red-100 dark:bg-red-900/20",
+      success: "bg-green-100 dark:bg-green-900/20",
+      info: "bg-blue-100 dark:bg-blue-900/20",
+      loading: "bg-gray-100 dark:bg-gray-800",
+    },
+    size: {
+      xs: "rounded-lg p-2",
+      sm: "rounded-xl p-2",
+      md: "rounded-2xl p-3",
+      lg: "rounded-2xl p-4",
+      xl: "rounded-3xl p-5",
+      "2xl": "rounded-3xl p-6",
+    },
+  },
+  defaultVariants: {
+    type: "default",
+    size: "md",
+  },
+});
+
+// CVA variants for icons
+const iconVariants = cva("icon", {
+  variants: {
+    type: {
+      default: "text-gray-500",
+      warning: "text-yellow-500",
+      error: "text-red-500",
+      success: "text-green-500",
+      info: "text-blue-500",
+      loading: "text-gray-500",
+    },
+    size: {
+      xs: "w-3 h-3",
+      sm: "w-4 h-4",
+      md: "w-5 h-5",
+      lg: "w-6 h-6",
+      xl: "w-7 h-7",
+      "2xl": "w-8 h-8",
+    },
+  },
+  defaultVariants: {
+    type: "default",
+    size: "md",
+  },
+});
+
+// CVA variants for title
+const titleVariants = cva("font-medium", {
+  variants: {
+    size: {
+      xs: "text-sm",
+      sm: "text-base",
+      md: "text-lg font-semibold max-md:text-base",
+      lg: "text-xl font-semibold",
+      xl: "text-2xl font-semibold",
+      "2xl": "text-3xl font-bold",
+    },
+  },
+  defaultVariants: {
+    size: "md",
+  },
+});
+
+// CVA variants for description
+const descriptionVariants = cva("opacity-80", {
+  variants: {
+    size: {
+      xs: "text-xs",
+      sm: "text-sm",
+      md: "text-base max-md:text-sm",
+      lg: "text-lg",
+      xl: "text-xl",
+      "2xl": "text-2xl",
+    },
+  },
+  defaultVariants: {
+    size: "md",
+  },
+});
+
+// CVA variants for actions container
+const actionsVariants = cva("flex flex-wrap", {
+  variants: {
+    size: {
+      xs: "mt-1 gap-1",
+      sm: "mt-1.5 gap-1.5",
+      md: "mt-2 gap-2",
+      lg: "mt-3 gap-2.5",
+      xl: "mt-4 gap-3",
+      "2xl": "mt-5 gap-4",
+    },
+  },
+  defaultVariants: {
+    size: "md",
+  },
+});
+
+// CVA variants for close button
+const closeButtonVariants = cva("absolute", {
+  variants: {
+    size: {
+      xs: "right-1 top-1",
+      sm: "right-2 top-2",
+      md: "right-3 top-3",
+      lg: "right-4 top-4",
+      xl: "right-5 top-5",
+      "2xl": "right-6 top-6",
+    },
+  },
+  defaultVariants: {
+    size: "md",
+  },
+});
+
+interface InfoBoxProps
+  extends Omit<React.HTMLAttributes<HTMLDivElement>, "title">,
+    VariantProps<typeof infoBoxVariants> {
   loading?: boolean;
   icon?: ReactNode;
   title?: string | ReactNode;
   description?: string | ReactNode;
   actions?: Array<ActionObject | ReactNode>;
   children?: ReactNode;
-  type?: InfoBoxType;
-  size?: InfoBoxSize;
-  colorScheme?: "default" | "full";
-  className?: string;
   onClose?: () => void;
 }
 
@@ -69,176 +263,36 @@ const InfoBox: FC<InfoBoxProps> = ({
   children,
   type = "default",
   size = "md",
-  colorScheme = "full",
+  colorScheme = "default",
   className,
   onClose,
+  ...props
 }) => {
-  // Get size-specific classes
-  const getSizeClasses = () => {
-    switch (size) {
-      case "xs":
-        return {
-          container: "gap-2 rounded-xl border p-2",
-          iconContainer: "rounded-lg p-2",
-          icon: "w-3 h-3",
-          title: "text-sm font-medium",
-          description: "text-xs",
-          actions: "mt-1 gap-1",
-          closeButton: "right-1 top-1",
-        };
-      case "sm":
-        return {
-          container: "gap-3 rounded-2xl border p-3",
-          iconContainer: "rounded-xl p-2",
-          icon: "w-4 h-4",
-          title: "text-base font-medium",
-          description: "text-sm",
-          actions: "mt-1.5 gap-1.5",
-          closeButton: "right-2 top-2",
-        };
-      case "md":
-        return {
-          container:
-            "gap-4 rounded-3xl border p-5 max-md:flex-col max-md:gap-2 max-md:p-3",
-          iconContainer: "rounded-2xl p-3",
-          icon: "w-5 h-5",
-          title: "text-lg font-semibold max-md:text-base",
-          description: "text-base max-md:text-sm",
-          actions: "mt-2 gap-2",
-          closeButton: "right-3 top-3",
-        };
-      case "lg":
-        return {
-          container: "gap-5 rounded-3xl border p-6",
-          iconContainer: "rounded-2xl p-4",
-          icon: "w-6 h-6",
-          title: "text-xl font-semibold",
-          description: "text-lg",
-          actions: "mt-3 gap-2.5",
-          closeButton: "right-4 top-4",
-        };
-      case "xl":
-        return {
-          container: "gap-6 rounded-3xl border p-8",
-          iconContainer: "rounded-3xl p-5",
-          icon: "w-7 h-7",
-          title: "text-2xl font-semibold",
-          description: "text-xl",
-          actions: "mt-4 gap-3",
-          closeButton: "right-5 top-5",
-        };
-      case "2xl":
-        return {
-          container: "gap-8 rounded-3xl border p-10",
-          iconContainer: "rounded-3xl p-6",
-          icon: "w-8 h-8",
-          title: "text-3xl font-bold",
-          description: "text-2xl",
-          actions: "mt-5 gap-4",
-          closeButton: "right-6 top-6",
-        };
-      default:
-        return {
-          container:
-            "gap-4 rounded-3xl border p-5 max-md:flex-col max-md:gap-2 max-md:p-3",
-          iconContainer: "rounded-2xl p-3",
-          icon: "w-5 h-5",
-          title: "text-lg font-semibold max-md:text-base",
-          description: "text-base max-md:text-sm",
-          actions: "mt-2 gap-2",
-          closeButton: "right-3 top-3",
-        };
-    }
-  };
-
-  const sizeClasses = getSizeClasses();
-
-  // Map type to appropriate icon and styles
+  // Map type to appropriate icon
   const getIconByType = () => {
     const iconProps = {
-      className: cn("icon", sizeClasses.icon),
+      className: iconVariants({ type, size }),
       color: "currentColor" as const,
       variant: "Bulk" as const,
     };
 
     if (loading) {
-      return <Loader loading className={cn("icon", sizeClasses.icon)} />;
+      return <Loader loading className={iconVariants({ size })} />;
     }
 
     switch (type) {
       case "warning":
-        return (
-          <Warning2
-            {...iconProps}
-            className={cn(iconProps.className, "text-yellow-500")}
-          />
-        );
+        return <Warning2 {...iconProps} />;
       case "error":
-        return (
-          <Danger
-            {...iconProps}
-            className={cn(iconProps.className, "text-red-500")}
-          />
-        );
+        return <Danger {...iconProps} />;
       case "success":
-        return (
-          <TickCircle
-            {...iconProps}
-            className={cn(iconProps.className, "text-green-500")}
-          />
-        );
+        return <TickCircle {...iconProps} />;
       case "info":
-        return (
-          <InfoCircle
-            {...iconProps}
-            className={cn(iconProps.className, "text-blue-500")}
-          />
-        );
+        return <InfoCircle {...iconProps} />;
       case "loading":
-        return (
-          <Loader loading={true} className={cn("icon", sizeClasses.icon)} />
-        );
+        return <Loader loading={true} className={iconVariants({ size })} />;
       default:
         return <Information {...iconProps} />;
-    }
-  };
-
-  const getIconContainerClasses = () => {
-    const baseClasses = cn(
-      "relative flex items-start justify-center",
-      sizeClasses.iconContainer
-    );
-
-    switch (type) {
-      case "warning":
-        return cn(baseClasses, "bg-yellow-100 dark:bg-yellow-900/20");
-      case "error":
-        return cn(baseClasses, "bg-red-100 dark:bg-red-900/20");
-      case "success":
-        return cn(baseClasses, "bg-green-100 dark:bg-green-900/20");
-      case "info":
-        return cn(baseClasses, "bg-blue-100 dark:bg-blue-900/20");
-      default:
-        return cn(baseClasses, "bg-gray-100 dark:bg-gray-800");
-    }
-  };
-
-  const getColorSchemeClasses = () => {
-    if (colorScheme === "default") {
-      return "border-gray-200 bg-gray-50 text-gray-900 dark:border-gray-700 dark:bg-gray-950 dark:text-gray-100";
-    }
-
-    switch (type) {
-      case "warning":
-        return "bg-yellow-50 dark:bg-yellow-950 border-yellow-200 dark:border-yellow-800 text-yellow-900 dark:text-yellow-100";
-      case "error":
-        return "bg-red-50 dark:bg-red-950 border-red-200 dark:border-red-800 text-red-900 dark:text-red-100";
-      case "success":
-        return "bg-green-50 dark:bg-green-950 border-green-200 dark:border-green-800 text-green-900 dark:text-green-100";
-      case "info":
-        return "bg-blue-50 dark:bg-blue-950 border-blue-200 dark:border-blue-800 text-blue-900 dark:text-blue-100";
-      default:
-        return "bg-gray-50 dark:bg-gray-950 border-gray-200 dark:border-gray-800 text-gray-900 dark:text-gray-100";
     }
   };
 
@@ -329,27 +383,23 @@ const InfoBox: FC<InfoBoxProps> = ({
 
   return (
     <div
-      className={cn(
-        "relative flex grow flex-wrap items-start",
-        sizeClasses.container,
-        getColorSchemeClasses(),
-        className
-      )}
+      className={cn(infoBoxVariants({ type, size, colorScheme }), className)}
+      {...props}
     >
       {displayIcon && (
-        <div className={getIconContainerClasses()}>{displayIcon}</div>
+        <div className={iconContainerVariants({ type, size })}>
+          {displayIcon}
+        </div>
       )}
 
       <div className="flex-1">
-        {title && <h3 className={sizeClasses.title}>{title}</h3>}
+        {title && <h3 className={titleVariants({ size })}>{title}</h3>}
         {description && (
-          <div className={cn("opacity-80", sizeClasses.description)}>
-            {description}
-          </div>
+          <div className={descriptionVariants({ size })}>{description}</div>
         )}
 
         {actions && actions.length > 0 && (
-          <div className={cn("flex flex-wrap", sizeClasses.actions)}>
+          <div className={actionsVariants({ size })}>
             {actions.map((action, index) => renderActionItem(action, index))}
           </div>
         )}
@@ -362,7 +412,7 @@ const InfoBox: FC<InfoBoxProps> = ({
           onClick={onClose}
           variant="ghost"
           size={getActionSize()}
-          className={cn("absolute", sizeClasses.closeButton)}
+          className={closeButtonVariants({ size })}
           aria-label="Close"
         >
           <CloseCircle className="icon" color="currentColor" variant="Bulk" />
@@ -372,4 +422,5 @@ const InfoBox: FC<InfoBoxProps> = ({
   );
 };
 
-export { InfoBox };
+export { InfoBox, infoBoxVariants };
+export type { InfoBoxProps };

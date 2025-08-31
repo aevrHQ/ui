@@ -28,6 +28,7 @@ export default function Home() {
             <InfoBox
               type="success"
               title="Success!"
+              colorScheme={"default"}
               description="Operation completed successfully"
               actions={[
                 {
