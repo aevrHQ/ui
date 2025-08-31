@@ -1,7 +1,7 @@
 {
   "$schema": "https://ui.shadcn.com/schema/registry.json",
-  "name": "acme",
-  "homepage": "https://acme.com",
+  "name": "aevr",
+  "homepage": "https://v1.ui.aevr.space",
   "items": [
     {
       "name": "button",
@@ -40,19 +40,6 @@
           "path": "registry/lagos/ui/loader.tsx",
           "type": "registry:component",
           "target": "components/ui/aevr/loader.tsx"
-        }
-      ]
-    },
-    {
-      "name": "hello-world",
-      "type": "registry:component",
-      "title": "Hello World",
-      "description": "A simple hello world component",
-      "registryDependencies": ["button"],
-      "files": [
-        {
-          "path": "registry/new-york/blocks/hello-world/hello-world.tsx",
-          "type": "registry:component"
         }
       ]
     },

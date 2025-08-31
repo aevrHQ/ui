@@ -18,7 +18,5 @@
     "hooks": "@/hooks"
   },
   "iconLibrary": "lucide",
-  "registries": {
-    "@aevr": "https://v1.ui.aevr.space/r/{name}.json"
-  }
+  "registries": { "@aevr": "https://v1.ui.aevr.space/r/{name}.json" }
 }
