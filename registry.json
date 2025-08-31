@@ -1,5 +1,5 @@
 {
-  "$schema": "https://v1.ui.aevr.space/schema/registry.json",
+  "$schema": "https://ui.shadcn.com/schema/registry.json",
   "name": "acme",
   "homepage": "https://acme.com",
   "items": [
@@ -11,7 +11,21 @@
       "files": [
         {
           "path": "registry/lagos/ui/button.tsx",
-          "type": "registry:component"
+          "type": "registry:component",
+          "target": "components/ui/aevr/button.tsx"
+        }
+      ]
+    },
+    {
+      "name": "info-box",
+      "type": "registry:component",
+      "title": "Info Box",
+      "description": "A simple info box component for displaying information, warnings, errors, loading states, and status messages.",
+      "files": [
+        {
+          "path": "registry/lagos/ui/info-box.tsx",
+          "type": "registry:component",
+          "target": "components/ui/aevr/info-box.tsx"
         }
       ]
     },
