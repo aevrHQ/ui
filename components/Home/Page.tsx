@@ -21,6 +21,7 @@ import { InfoBox } from "@/registry/lagos/ui/info-box";
 import Loader from "@/registry/lagos/ui/loader";
 import SummaryCard from "@/registry/lagos/ui/summary-card";
 import { Card, CardGrid } from "@/registry/lagos/ui/card";
+import Link from "next/link";
 
 // Copy button component
 const CopyButton: React.FC<{ text: string; className?: string }> = ({
@@ -197,9 +198,11 @@ export default function HomePage() {
                 <Terminal className="w-5 h-5" />
                 Get Started
               </Button>
-              <Button variant="secondary" size="lg">
-                <Github className="w-5 h-5" />
-                View on GitHub
+              <Button asChild variant="secondary" size="lg">
+                <Link href="https://github.com/aevrhq/ui">
+                  <Github className="w-5 h-5" />
+                  <span>View on GitHub</span>
+                </Link>
               </Button>
             </div>
           </div>
