@@ -85,7 +85,7 @@
       "description": "A utility function for formatting numbers and currencies.",
       "files": [
         {
-          "path": "registry/utils/number-formatter.ts",
+          "path": "registry/lagos/utils/number-formatter.ts",
           "type": "registry:lib",
           "target": "utils/aevr/number-formatter.ts"
         }
