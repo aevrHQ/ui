@@ -2,6 +2,11 @@
   "$schema": "https://ui.shadcn.com/schema/registry.json",
   "name": "aevr",
   "homepage": "https://v1.ui.aevr.space",
+  "dependencies": [
+    "class-variance-authority",
+    "tw-animate-css",
+    "iconsax-react"
+  ],
   "items": [
     {
       "name": "button",
@@ -103,8 +108,5 @@
         }
       ]
     }
-  ],
-  "registries": {
-    "@aevr": "https://v1.ui.aevr.space/r/{name}.json"
-  }
+  ]
 }
