@@ -12,9 +12,11 @@
   "dependencies": {
     "@radix-ui/react-label": "^2.1.7",
     "@radix-ui/react-slot": "^1.2.3",
+    "@untools/logger": "^0.0.6",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
     "iconsax-react": "^0.0.8",
+    "iso-country-currency": "^0.7.2",
     "lucide-react": "^0.487.0",
     "motion": "^12.23.12",
     "next": "15.3.1",

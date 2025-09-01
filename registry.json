@@ -5,7 +5,9 @@
   "dependencies": [
     "class-variance-authority",
     "tw-animate-css",
-    "iconsax-react"
+    "iconsax-react",
+    "iso-country-currency",
+    "@untools/logger"
   ],
   "items": [
     {
@@ -45,6 +47,32 @@
           "path": "registry/lagos/ui/loader.tsx",
           "type": "registry:component",
           "target": "components/ui/aevr/loader.tsx"
+        }
+      ]
+    },
+    {
+      "name": "summary-card",
+      "type": "registry:component",
+      "title": "Summary Card",
+      "description": "A simple summary card component for displaying summary information.",
+      "files": [
+        {
+          "path": "registry/lagos/ui/summary-card.tsx",
+          "type": "registry:component",
+          "target": "components/ui/aevr/summary-card.tsx"
+        }
+      ]
+    },
+    {
+      "name": "number-formatter",
+      "type": "registry:lib",
+      "title": "Number Formatter",
+      "description": "A utility function for formatting numbers and currencies.",
+      "files": [
+        {
+          "path": "registry/utils/number-formatter.ts",
+          "type": "registry:lib",
+          "target": "utils/aevr/number-formatter.ts"
         }
       ]
     },
