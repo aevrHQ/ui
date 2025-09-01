@@ -33,7 +33,7 @@ const buttonVariants = cva(
           "bg-red-500 text-red-50 hover:bg-red-600 focus:ring-red-500 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-600",
       },
       size: {
-        sm: "px-2 py-1.5 text-sm",
+        sm: "px-2 py-1.5 text-sm rounded-lg",
         md: "px-3 py-2 text-base",
         lg: "px-6 py-3 text-xl",
       },

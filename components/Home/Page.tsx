@@ -1,5 +1,3 @@
-// ./components/Home/Page.tsx
-
 "use client";
 
 import * as React from "react";
@@ -61,13 +59,13 @@ const CodeBlock: React.FC<{ children: string; title?: string }> = ({
   return (
     <div className="relative">
       {title && (
-        <div className="flex items-center justify-between bg-gray-800 text-gray-200 px-4 py-2 rounded-t-lg border-b border-gray-700">
+        <div className="flex items-center justify-between bg-gray-800 dark:bg-gray-950/50 text-gray-200 dark:text-gray-100 px-2 py-2 rounded-t-2xl border-b border-gray-700 dark:border-gray-600">
           <span className="text-sm font-mono">{title}</span>
           <CopyButton text={children} />
         </div>
       )}
       <pre
-        className={`bg-gray-900 text-gray-100 p-4 ${
+        className={`bg-gray-900 dark:bg-gray-950 text-gray-100 dark:text-gray-50 p-4 ${
           title ? "rounded-b-lg" : "rounded-lg"
         } overflow-x-auto text-sm`}
       >
@@ -76,7 +74,7 @@ const CodeBlock: React.FC<{ children: string; title?: string }> = ({
       {!title && (
         <CopyButton
           text={children}
-          className="absolute top-2 right-2 bg-gray-800 hover:bg-gray-700 text-gray-200"
+          className="absolute top-2 right-2 bg-gray-800 dark:bg-gray-900 hover:bg-gray-700 dark:hover:bg-gray-800 text-gray-200 dark:text-gray-100"
         />
       )}
     </div>
@@ -174,13 +172,13 @@ export default function HomePage() {
   ];
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-purple-50">
+    <div className="min-h-screen">
       {/* Hero Section */}
-      <header className="relative overflow-hidden text-blue-50">
-        <div className="absolute inset-0 bg-blue-600"></div>
+      <header className="relative overflow-hidden text-blue-50 dark:text-blue-100">
+        <div className="absolute inset-0 bg-blue-600 dark:bg-blue-800"></div>
         <div className="relative max-w-6xl mx-auto px-4 py-16 sm:py-24">
           <div className="text-center">
-            <div className="inline-flex items-center gap-2 bg-blue-100 text-blue-800 px-3 py-1 rounded-full text-sm font-medium mb-6">
+            <div className="inline-flex items-center gap-2 bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-200 px-3 py-1 rounded-full text-sm font-medium mb-6">
               <Package className="w-4 h-4" />
               Custom shadcn/ui Registry
             </div>
@@ -234,7 +232,7 @@ export default function HomePage() {
       {/* Main Content */}
       <main className="max-w-6xl mx-auto px-4 py-8">
         {/* Navigation Tabs */}
-        <div className="flex flex-wrap gap-2 mb-8 bg-white p-2 rounded-xl shadow-sm border">
+        <div className="flex flex-wrap gap-2 mb-8 bg-white dark:bg-gray-800 p-2 rounded-xl shadow-sm border dark:border-gray-700">
           {[
             { id: "quick-start", label: "Quick Start", icon: Zap },
             { id: "components", label: "Components", icon: Package },
@@ -247,8 +245,8 @@ export default function HomePage() {
               }
               className={`flex items-center gap-2 px-4 py-2 rounded-lg font-medium transition-all ${
                 selectedTab === id
-                  ? "bg-blue-100 text-blue-700 shadow-sm"
-                  : "text-gray-600 hover:text-gray-900 hover:bg-gray-50"
+                  ? "bg-blue-100 dark:bg-blue-900 text-blue-700 dark:text-blue-200 shadow-sm"
+                  : "text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-100 hover:bg-gray-50 dark:hover:bg-gray-700"
               }`}
             >
               <Icon className="w-4 h-4" />
@@ -268,17 +266,17 @@ export default function HomePage() {
                 icon={<Shield className="w-5 h-5" />}
                 variant="primary"
               >
-                <ul className="space-y-2 text-gray-600">
+                <ul className="space-y-2 text-gray-600 dark:text-gray-400">
                   <li className="flex items-center gap-2">
-                    <div className="w-1.5 h-1.5 bg-blue-500 rounded-full"></div>
+                    <div className="w-1.5 h-1.5 bg-blue-500 dark:bg-blue-400 rounded-full"></div>
                     Next.js 13+ project
                   </li>
                   <li className="flex items-center gap-2">
-                    <div className="w-1.5 h-1.5 bg-blue-500 rounded-full"></div>
+                    <div className="w-1.5 h-1.5 bg-blue-500 dark:bg-blue-400 rounded-full"></div>
                     Tailwind CSS configured
                   </li>
                   <li className="flex items-center gap-2">
-                    <div className="w-1.5 h-1.5 bg-blue-500 rounded-full"></div>
+                    <div className="w-1.5 h-1.5 bg-blue-500 dark:bg-blue-400 rounded-full"></div>
                     shadcn/ui initialized
                   </li>
                 </ul>
@@ -291,7 +289,7 @@ export default function HomePage() {
                 icon={<Zap className="w-5 h-5" />}
                 variant="success"
               >
-                <p className="text-gray-600 mb-4">
+                <p className="text-gray-600 dark:text-gray-400 mb-4">
                   Add any component with one command:
                 </p>
                 <CodeBlock>npx shadcn@latest add @aevr/button</CodeBlock>
@@ -310,16 +308,16 @@ export default function HomePage() {
                 {/* Step 1: shadcn/ui Setup */}
                 <div>
                   <div className="flex items-center gap-3 mb-4">
-                    <div className="w-8 h-8 bg-blue-500 text-white rounded-full flex items-center justify-center text-sm font-bold">
+                    <div className="w-8 h-8 bg-blue-500 dark:bg-blue-600 text-white dark:text-gray-100 rounded-full flex items-center justify-center text-sm font-bold">
                       1
                     </div>
-                    <h4 className="text-lg font-semibold">
+                    <h4 className="text-lg font-semibold dark:text-gray-100">
                       Setup shadcn/ui (if not already done)
                     </h4>
                   </div>
 
                   <div className="pl-11 space-y-4">
-                    <p className="text-gray-600">
+                    <p className="text-gray-600 dark:text-gray-400">
                       If you haven&apos;t set up shadcn/ui in your project yet,
                       run:
                     </p>
@@ -337,18 +335,18 @@ export default function HomePage() {
                 {/* Step 2: Configure Registry */}
                 <div>
                   <div className="flex items-center gap-3 mb-4">
-                    <div className="w-8 h-8 bg-blue-500 text-white rounded-full flex items-center justify-center text-sm font-bold">
+                    <div className="w-8 h-8 bg-blue-500 dark:bg-blue-600 text-white dark:text-gray-100 rounded-full flex items-center justify-center text-sm font-bold">
                       2
                     </div>
-                    <h4 className="text-lg font-semibold">
+                    <h4 className="text-lg font-semibold dark:text-gray-100">
                       Configure Custom Registry
                     </h4>
                   </div>
 
                   <div className="pl-11 space-y-4">
-                    <p className="text-gray-600">
+                    <p className="text-gray-600 dark:text-gray-400">
                       Add the aevr registry to your{" "}
-                      <code className="bg-gray-100 px-2 py-1 rounded text-sm">
+                      <code className="bg-gray-100 dark:bg-gray-800 text-gray-900 dark:text-gray-100 px-2 py-1 rounded text-sm">
                         components.json
                       </code>{" "}
                       file:
@@ -380,29 +378,33 @@ export default function HomePage() {
                 {/* Step 3: Install Dependencies */}
                 <div>
                   <div className="flex items-center gap-3 mb-4">
-                    <div className="w-8 h-8 bg-blue-500 text-white rounded-full flex items-center justify-center text-sm font-bold">
+                    <div className="w-8 h-8 bg-blue-500 dark:bg-blue-600 text-white dark:text-gray-100 rounded-full flex items-center justify-center text-sm font-bold">
                       3
                     </div>
-                    <h4 className="text-lg font-semibold">
+                    <h4 className="text-lg font-semibold dark:text-gray-100">
                       Install Registry Dependencies
                     </h4>
                   </div>
 
                   <div className="pl-11 space-y-4">
-                    <p className="text-gray-600">
+                    <p className="text-gray-600 dark:text-gray-400">
                       Install the required dependencies for aevr components:
                     </p>
 
                     <div className="grid sm:grid-cols-2 gap-4">
                       <div>
-                        <p className="text-sm font-medium mb-2">npm:</p>
+                        <p className="text-sm font-medium mb-2 dark:text-gray-300">
+                          npm:
+                        </p>
                         <CodeBlock>
                           npm install class-variance-authority tw-animate-css
                           iconsax-react iso-country-currency @untools/logger
                         </CodeBlock>
                       </div>
                       <div>
-                        <p className="text-sm font-medium mb-2">yarn:</p>
+                        <p className="text-sm font-medium mb-2 dark:text-gray-300">
+                          yarn:
+                        </p>
                         <CodeBlock>
                           yarn add class-variance-authority tw-animate-css
                           iconsax-react iso-country-currency @untools/logger
@@ -415,14 +417,16 @@ export default function HomePage() {
                 {/* Step 4: Add Components */}
                 <div>
                   <div className="flex items-center gap-3 mb-4">
-                    <div className="w-8 h-8 bg-blue-500 text-white rounded-full flex items-center justify-center text-sm font-bold">
+                    <div className="w-8 h-8 bg-blue-500 dark:bg-blue-600 text-white dark:text-gray-100 rounded-full flex items-center justify-center text-sm font-bold">
                       4
                     </div>
-                    <h4 className="text-lg font-semibold">Add Components</h4>
+                    <h4 className="text-lg font-semibold dark:text-gray-100">
+                      Add Components
+                    </h4>
                   </div>
 
                   <div className="pl-11 space-y-4">
-                    <p className="text-gray-600">
+                    <p className="text-gray-600 dark:text-gray-400">
                       Now you can add any component from the aevr registry:
                     </p>
 
@@ -458,7 +462,7 @@ export default function HomePage() {
               size="lg"
             >
               <div className="space-y-4 mt-2">
-                <p className="text-gray-600">
+                <p className="text-gray-600 dark:text-gray-400">
                   After installation, import and use components in your React
                   components:
                 </p>
@@ -505,8 +509,10 @@ export default function Page() {
         {selectedTab === "components" && (
           <div className="space-y-6">
             <div className="text-center mb-8">
-              <h2 className="text-3xl font-bold mb-4">Available Components</h2>
-              <p className="text-gray-600 max-w-2xl mx-auto">
+              <h2 className="text-3xl font-bold mb-4 dark:text-gray-100">
+                Available Components
+              </h2>
+              <p className="text-gray-600 dark:text-gray-400 max-w-2xl mx-auto">
                 Production-ready components built with accessibility and
                 customization in mind. Each component follows shadcn/ui patterns
                 and conventions.
@@ -520,7 +526,7 @@ export default function Page() {
                   title={component.title}
                   subtitle={component.description}
                   badge={
-                    <span className="bg-gray-100 text-gray-600 px-2 py-1 rounded-md text-xs font-mono">
+                    <span className="bg-gray-100 dark:bg-gray-800 text-gray-600 dark:text-gray-400 px-2 py-1 rounded-md text-xs font-mono">
                       {component.name}
                     </span>
                   }
@@ -543,7 +549,7 @@ export default function Page() {
                     },
                   ]}
                 >
-                  <div className="bg-gray-50 rounded-2xl p-4 flex items-center justify-center min-h-[120px] w-full">
+                  <div className="bg-gray-50 dark:bg-gray-800 rounded-2xl p-4 flex items-center justify-center min-h-[120px] w-full">
                     {component.preview}
                   </div>
                 </Card>
@@ -556,8 +562,10 @@ export default function Page() {
         {selectedTab === "utils" && (
           <div className="space-y-6">
             <div className="text-center mb-8">
-              <h2 className="text-3xl font-bold mb-4">Utility Functions</h2>
-              <p className="text-gray-600 max-w-2xl mx-auto">
+              <h2 className="text-3xl font-bold mb-4 dark:text-gray-100">
+                Utility Functions
+              </h2>
+              <p className="text-gray-600 dark:text-gray-400 max-w-2xl mx-auto">
                 Helpful utility functions to enhance your development workflow.
                 These utilities handle common tasks like formatting and
                 validation.
@@ -571,7 +579,7 @@ export default function Page() {
                   title={util.title}
                   subtitle={util.description}
                   badge={
-                    <span className="bg-gray-100 text-gray-600 px-2 py-1 rounded-md text-xs font-mono">
+                    <span className="bg-gray-100 dark:bg-gray-800 text-gray-600 dark:text-gray-400 px-2 py-1 rounded-md text-xs font-mono">
                       {util.name}
                     </span>
                   }
@@ -590,16 +598,16 @@ export default function Page() {
                 >
                   <div className="grid md:grid-cols-2 gap-6">
                     <div>
-                      <h4 className="font-medium text-sm text-gray-800 mb-3">
+                      <h4 className="font-medium text-sm text-gray-800 dark:text-gray-200 mb-3">
                         Features:
                       </h4>
                       <ul className="space-y-2">
                         {util.features.map((feature, index) => (
                           <li
                             key={index}
-                            className="flex items-center gap-2 text-sm text-gray-600"
+                            className="flex items-center gap-2 text-sm text-gray-600 dark:text-gray-400"
                           >
-                            <Check className="w-4 h-4 text-green-500" />
+                            <Check className="w-4 h-4 text-green-500 dark:text-green-400" />
                             {feature}
                           </li>
                         ))}
@@ -607,7 +615,7 @@ export default function Page() {
                     </div>
 
                     <div>
-                      <h4 className="font-medium text-sm text-gray-800 mb-3">
+                      <h4 className="font-medium text-sm text-gray-800 dark:text-gray-200 mb-3">
                         Installation:
                       </h4>
                       <CodeBlock>{`npx shadcn@latest add @aevr/${util.name}`}</CodeBlock>
@@ -615,8 +623,8 @@ export default function Page() {
                   </div>
 
                   {util.name === "number-formatter" && (
-                    <div className="mt-6 pt-6 border-t">
-                      <h4 className="font-medium text-sm text-gray-800 mb-3">
+                    <div className="mt-6 pt-6 border-t dark:border-gray-700">
+                      <h4 className="font-medium text-sm text-gray-800 dark:text-gray-200 mb-3">
                         Usage Examples:
                       </h4>
                       <CodeBlock>{`import { formatCurrency, formatNumber, formatCardNumber } from "@/utils/number-formatter";
@@ -641,8 +649,10 @@ formatCardNumber("1234567890123456", { mask: true }); // "**** **** **** 3456"`}
         {/* Features Section using Cards */}
         <div className="mt-16">
           <div className="text-center mb-8">
-            <h2 className="text-3xl font-bold mb-4">Why Choose aevr/ui?</h2>
-            <p className="text-gray-600 max-w-2xl mx-auto">
+            <h2 className="text-3xl font-bold mb-4 dark:text-gray-100">
+              Why Choose aevr/ui?
+            </h2>
+            <p className="text-gray-600 dark:text-gray-400 max-w-2xl mx-auto">
               Built with modern development practices and designed for
               production use.
             </p>
@@ -669,7 +679,9 @@ formatCardNumber("1234567890123456", { mask: true }); // "**** **** **** 3456"`}
 
         {/* Getting Help */}
         <div className="mt-12">
-          <h3 className="text-2xl font-bold mb-6 text-center">Need Help?</h3>
+          <h3 className="text-2xl font-bold mb-6 text-center dark:text-gray-100">
+            Need Help?
+          </h3>
 
           <CardGrid cols={2} spacing="normal">
             <Card
@@ -707,22 +719,22 @@ formatCardNumber("1234567890123456", { mask: true }); // "**** **** **** 3456"`}
       </main>
 
       {/* Footer */}
-      <footer className="border-t bg-white/50 backdrop-blur">
+      <footer className="border-t dark:border-gray-700 bg-white/50 dark:bg-gray-900/50 backdrop-blur">
         <div className="max-w-6xl mx-auto px-4 py-8">
           <div className="flex flex-col md:flex-row items-center justify-between">
             <div className="flex items-center gap-2 mb-4 md:mb-0">
-              <Package className="w-5 h-5 text-blue-600" />
-              <span className="font-semibold">aevr/ui</span>
+              <Package className="w-5 h-5 text-blue-600 dark:text-blue-400" />
+              <span className="font-semibold dark:text-gray-100">aevr/ui</span>
             </div>
 
-            <div className="flex items-center gap-4 text-sm text-gray-600">
+            <div className="flex items-center gap-4 text-sm text-gray-600 dark:text-gray-400">
               <span>Built with shadcn/ui</span>
               <span>•</span>
               <span>Powered by Next.js</span>
               <span>•</span>
               <a
                 href="https://v1.ui.aevr.space"
-                className="hover:text-blue-600 transition-colors"
+                className="hover:text-blue-600 dark:hover:text-blue-400 transition-colors"
               >
                 v1.ui.aevr.space
               </a>
