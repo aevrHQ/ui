@@ -89,7 +89,8 @@
           "type": "registry:lib",
           "target": "utils/aevr/number-formatter.ts"
         }
-      ]
+      ],
+      "dependencies": ["iso-country-currency", "@untools/logger"]
     }
   ]
 }

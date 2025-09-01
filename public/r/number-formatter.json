@@ -4,6 +4,10 @@
   "type": "registry:lib",
   "title": "Number Formatter",
   "description": "A utility function for formatting numbers and currencies.",
+  "dependencies": [
+    "iso-country-currency",
+    "@untools/logger"
+  ],
   "files": [
     {
       "path": "registry/utils/number-formatter.ts",
