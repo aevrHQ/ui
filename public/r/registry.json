@@ -55,7 +55,7 @@
       "type": "registry:component",
       "title": "Summary Card",
       "description": "A simple summary card component for displaying summary information.",
-      "registryDependencies": ["@aevr/button", "@aevr/number-formatter"],
+      "registryDependencies": ["button", "number-formatter"],
       "files": [
         {
           "path": "registry/lagos/ui/summary-card.tsx",

@@ -5,8 +5,8 @@
   "title": "Summary Card",
   "description": "A simple summary card component for displaying summary information.",
   "registryDependencies": [
-    "button",
-    "number-formatter"
+    "@aevr/button",
+    "@aevr/number-formatter"
   ],
   "files": [
     {
