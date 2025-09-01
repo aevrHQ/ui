@@ -120,7 +120,7 @@ const cardVariants = cva(
 
 // CVA variants for card header
 const cardHeaderVariants = cva(
-  "mb-1 border-b pb-1 border-gray-100 dark:border-gray-700",
+  " border-b  border-gray-100 dark:border-gray-700",
   {
     variants: {
       borderless: {
@@ -172,40 +172,34 @@ const cardSubtitleVariants = cva("opacity-75", {
 });
 
 // CVA variants for card icon
-const cardIconVariants = cva(
-  "flex items-center justify-center rounded-2xl mb-4",
-  {
-    variants: {
-      variant: {
-        default:
-          "bg-gray-100 text-gray-600 dark:bg-gray-800 dark:text-gray-400",
-        primary:
-          "bg-blue-100 text-blue-600 dark:bg-blue-900 dark:text-blue-400",
-        secondary:
-          "bg-gray-100 text-gray-600 dark:bg-gray-800 dark:text-gray-400",
-        success:
-          "bg-green-100 text-green-600 dark:bg-green-900 dark:text-green-400",
-        warning:
-          "bg-yellow-100 text-yellow-600 dark:bg-yellow-900 dark:text-yellow-400",
-        error: "bg-red-100 text-red-600 dark:bg-red-900 dark:text-red-400",
-        info: "bg-blue-100 text-blue-600 dark:bg-blue-900 dark:text-blue-400",
-        glass:
-          "bg-white/20 text-gray-600 dark:bg-gray-700/20 dark:text-gray-400",
-      },
-      size: {
-        xs: "h-6 w-6 rounded-lg",
-        sm: "h-8 w-8 rounded-xl",
-        md: "h-12 w-12",
-        lg: "h-16 w-16 rounded-3xl",
-        xl: "h-20 w-20 rounded-3xl",
-      },
+const cardIconVariants = cva("flex items-center justify-center rounded-2xl", {
+  variants: {
+    variant: {
+      default: "bg-gray-100 text-gray-600 dark:bg-gray-800 dark:text-gray-400",
+      primary: "bg-blue-100 text-blue-600 dark:bg-blue-900 dark:text-blue-400",
+      secondary:
+        "bg-gray-100 text-gray-600 dark:bg-gray-800 dark:text-gray-400",
+      success:
+        "bg-green-100 text-green-600 dark:bg-green-900 dark:text-green-400",
+      warning:
+        "bg-yellow-100 text-yellow-600 dark:bg-yellow-900 dark:text-yellow-400",
+      error: "bg-red-100 text-red-600 dark:bg-red-900 dark:text-red-400",
+      info: "bg-blue-100 text-blue-600 dark:bg-blue-900 dark:text-blue-400",
+      glass: "bg-white/20 text-gray-600 dark:bg-gray-700/20 dark:text-gray-400",
     },
-    defaultVariants: {
-      variant: "default",
-      size: "md",
+    size: {
+      xs: "h-6 w-6 rounded-lg",
+      sm: "h-8 w-8 rounded-xl",
+      md: "h-12 w-12",
+      lg: "h-16 w-16 rounded-3xl",
+      xl: "h-20 w-20 rounded-3xl",
     },
-  }
-);
+  },
+  defaultVariants: {
+    variant: "default",
+    size: "md",
+  },
+});
 
 // CVA variants for card footer
 const cardFooterVariants = cva(
@@ -334,6 +328,7 @@ export interface CardProps
   collapsed?: boolean;
 
   // Header/Footer
+  headerDirection?: "row" | "col";
   headerBorderless?: boolean;
   footerBorderless?: boolean;
   footerAlignment?: "left" | "right" | "center" | "between";
@@ -394,6 +389,7 @@ const Card = forwardRef<HTMLDivElement, CardProps>(
       onClick,
       loading = false,
       collapsed = false,
+      headerDirection = "row",
       headerBorderless = true,
       footerBorderless = true,
       footerAlignment = "left",
@@ -643,7 +639,11 @@ const Card = forwardRef<HTMLDivElement, CardProps>(
                 borderless: headerBorderless,
               })}
             >
-              <div className="flex items-start gap-3">
+              <div
+                className={`flex items-start gap-3 ${
+                  headerDirection === "row" ? "flex-row" : "flex-col"
+                }`}
+              >
                 {icon && (
                   <div className={cardIconVariants({ variant, size })}>
                     {icon}
@@ -670,7 +670,7 @@ const Card = forwardRef<HTMLDivElement, CardProps>(
                 collapsed &&
                   "max-h-0 overflow-hidden opacity-0 transition-all duration-300 ease-in-out",
                 !collapsed &&
-                  "max-h-screen opacity-100 transition-all duration-300 ease-in-out"
+                  "opacity-100 transition-all duration-300 ease-in-out"
               )}
             >
               {children}
