@@ -1,4 +1,4 @@
-// components/SummaryCard.tsx
+// ./registry/lagos/ui/summary-card.tsx
 
 import React, { ReactNode } from "react";
 import {
