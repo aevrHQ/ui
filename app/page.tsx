@@ -1,3 +1,5 @@
+// ./app/page.tsx
+
 "use client";
 
 import * as React from "react";
@@ -13,11 +15,16 @@ import {
   Terminal,
   ArrowRight,
   Github,
+  Star,
+  Users,
+  Download,
+  Settings,
 } from "lucide-react";
 import { Button } from "@/registry/lagos/ui/button";
 import { InfoBox } from "@/registry/lagos/ui/info-box";
 import Loader from "@/registry/lagos/ui/loader";
 import SummaryCard from "@/registry/lagos/ui/summary-card";
+import { Card, CardGrid } from "@/registry/lagos/ui/card";
 
 // Copy button component
 const CopyButton: React.FC<{ text: string; className?: string }> = ({
@@ -96,6 +103,21 @@ export default function Home() {
       preview: <Button variant="primary">Click me</Button>,
     },
     {
+      name: "card",
+      title: "Card",
+      description:
+        "Flexible card component with support for actions, media, and various layouts",
+      preview: (
+        <Card
+          title="Sample Card"
+          subtitle="This is a preview"
+          icon={<Package className="w-4 h-4" />}
+        >
+          <p className="text-sm">Card content goes here</p>
+        </Card>
+      ),
+    },
+    {
       name: "info-box",
       title: "Info Box",
       description: "Display information, warnings, errors, and status messages",
@@ -160,8 +182,8 @@ export default function Home() {
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-purple-50">
       {/* Hero Section */}
-      <header className="relative overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-r from-blue-600/10 to-purple-600/10"></div>
+      <header className="relative overflow-hidden text-blue-50">
+        <div className="absolute inset-0 bg-blue-600"></div>
         <div className="relative max-w-6xl mx-auto px-4 py-16 sm:py-24">
           <div className="text-center">
             <div className="inline-flex items-center gap-2 bg-blue-100 text-blue-800 px-3 py-1 rounded-full text-sm font-medium mb-6">
@@ -169,20 +191,15 @@ export default function Home() {
               Custom shadcn/ui Registry
             </div>
 
-            <h1 className="text-4xl sm:text-6xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent mb-6">
-              AEVR Registry
-            </h1>
+            <h1 className="text-4xl sm:text-6xl font-bold  mb-6">aevr/ui</h1>
 
-            <p className="text-xl text-gray-600 mb-8 max-w-2xl mx-auto">
+            <p className="text-xl mb-8 max-w-2xl mx-auto">
               A collection of beautiful, accessible, and production-ready
               components built on top of shadcn/ui. Get started in seconds.
             </p>
 
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Button
-                size="lg"
-                className="bg-blue-600 hover:bg-blue-700 text-white"
-              >
+              <Button size="lg">
                 <Terminal className="w-5 h-5" />
                 Get Started
               </Button>
@@ -194,6 +211,44 @@ export default function Home() {
           </div>
         </div>
       </header>
+
+      {/* Stats Section using Cards */}
+      <section className="max-w-6xl mx-auto px-4 -mt-8 relative z-10 mb-12">
+        <CardGrid cols={4} spacing="normal">
+          <Card
+            icon={<Download className="w-5 h-5" />}
+            title="5+"
+            subtitle="Components"
+            variant="glass"
+            elevation="floating"
+            size="sm"
+          />
+          <Card
+            icon={<Users className="w-5 h-5" />}
+            title="1,200+"
+            subtitle="Downloads"
+            variant="glass"
+            elevation="floating"
+            size="sm"
+          />
+          <Card
+            icon={<Star className="w-5 h-5" />}
+            title="98%"
+            subtitle="Satisfaction"
+            variant="glass"
+            elevation="floating"
+            size="sm"
+          />
+          <Card
+            icon={<Settings className="w-5 h-5" />}
+            title="TypeScript"
+            subtitle="First"
+            variant="glass"
+            elevation="floating"
+            size="sm"
+          />
+        </CardGrid>
+      </section>
 
       {/* Main Content */}
       <main className="max-w-6xl mx-auto px-4 py-12">
@@ -224,15 +279,13 @@ export default function Home() {
         {/* Quick Start Tab */}
         {selectedTab === "quick-start" && (
           <div className="space-y-8">
-            <div className="grid md:grid-cols-2 gap-6">
-              {/* Prerequisites */}
-              <div className="bg-white rounded-xl p-6 shadow-sm border">
-                <div className="flex items-center gap-3 mb-4">
-                  <div className="w-10 h-10 bg-blue-100 rounded-lg flex items-center justify-center">
-                    <Shield className="w-5 h-5 text-blue-600" />
-                  </div>
-                  <h3 className="text-lg font-semibold">Prerequisites</h3>
-                </div>
+            <CardGrid cols={2} spacing="normal">
+              {/* Prerequisites Card */}
+              <Card
+                title="Prerequisites"
+                icon={<Shield className="w-5 h-5" />}
+                variant="primary"
+              >
                 <ul className="space-y-2 text-gray-600">
                   <li className="flex items-center gap-2">
                     <div className="w-1.5 h-1.5 bg-blue-500 rounded-full"></div>
@@ -247,32 +300,30 @@ export default function Home() {
                     shadcn/ui initialized
                   </li>
                 </ul>
-              </div>
+              </Card>
 
-              {/* Quick Install */}
-              <div className="bg-white rounded-xl p-6 shadow-sm border">
-                <div className="flex items-center gap-3 mb-4">
-                  <div className="w-10 h-10 bg-green-100 rounded-lg flex items-center justify-center">
-                    <Zap className="w-5 h-5 text-green-600" />
-                  </div>
-                  <h3 className="text-lg font-semibold">Quick Install</h3>
-                </div>
+              {/* Quick Install Card */}
+              <Card
+                title="Quick Install"
+                icon={<Zap className="w-5 h-5" />}
+                variant="success"
+              >
                 <p className="text-gray-600 mb-4">
                   Add any component with one command:
                 </p>
                 <CodeBlock>
                   npx shadcn@latest add --registry @aevr button
                 </CodeBlock>
-              </div>
-            </div>
+              </Card>
+            </CardGrid>
 
             {/* Setup Instructions */}
-            <div className="bg-white rounded-xl p-8 shadow-sm border">
-              <h3 className="text-2xl font-bold mb-6 flex items-center gap-3">
-                <Terminal className="w-6 h-6 text-blue-600" />
-                Setup Instructions
-              </h3>
-
+            <Card
+              title="Setup Instructions"
+              icon={<Terminal className="w-6 h-6" />}
+              variant="default"
+              size="lg"
+            >
               <div className="space-y-8">
                 {/* Step 1: shadcn/ui Setup */}
                 <div>
@@ -314,7 +365,7 @@ export default function Home() {
 
                   <div className="pl-11 space-y-4">
                     <p className="text-gray-600">
-                      Add the AEVR registry to your{" "}
+                      Add the aevr registry to your{" "}
                       <code className="bg-gray-100 px-2 py-1 rounded text-sm">
                         components.json
                       </code>{" "}
@@ -357,7 +408,7 @@ export default function Home() {
 
                   <div className="pl-11 space-y-4">
                     <p className="text-gray-600">
-                      Install the required dependencies for AEVR components:
+                      Install the required dependencies for aevr components:
                     </p>
 
                     <div className="grid sm:grid-cols-2 gap-4">
@@ -390,7 +441,7 @@ export default function Home() {
 
                   <div className="pl-11 space-y-4">
                     <p className="text-gray-600">
-                      Now you can add any component from the AEVR registry:
+                      Now you can add any component from the aevr registry:
                     </p>
 
                     <div className="space-y-3">
@@ -399,7 +450,7 @@ export default function Home() {
                       </CodeBlock>
                       <CodeBlock title="Add multiple components">
                         npx shadcn@latest add --registry @aevr button info-box
-                        loader
+                        loader card
                       </CodeBlock>
                       <CodeBlock title="Add utilities">
                         npx shadcn@latest add --registry @aevr number-formatter
@@ -414,23 +465,24 @@ export default function Home() {
                   </div>
                 </div>
               </div>
-            </div>
+            </Card>
 
             {/* Usage Example */}
-            <div className="bg-white rounded-xl p-8 shadow-sm border">
-              <h3 className="text-2xl font-bold mb-6 flex items-center gap-3">
-                <Code className="w-6 h-6 text-green-600" />
-                Usage Example
-              </h3>
-
+            <Card
+              title="Usage Example"
+              icon={<Code className="w-6 h-6" />}
+              variant="success"
+              size="lg"
+            >
               <div className="space-y-4">
                 <p className="text-gray-600">
                   After installation, import and use components in your React
                   components:
                 </p>
 
-                <CodeBlock title="app/page.tsx">{`import { Button } from "@/components/ui/aevr/button";
-import { InfoBox } from "@/components/ui/aevr/info-box";
+                <CodeBlock title="app/page.tsx">{`import { Button } from "@/registry/lagos/ui/button";
+import { InfoBox } from "@/registry/lagos/ui/info-box";
+import { Card, CardGrid } from "@/registry/lagos/ui/card";
 import { formatCurrency } from "@/utils/aevr/number-formatter";
 
 export default function Page() {
@@ -438,23 +490,31 @@ export default function Page() {
   
   return (
     <div className="p-6">
-      <InfoBox 
-        type="success"
-        title="Welcome!"
-        description="Your AEVR components are ready to use."
+      <Card
+        title="Welcome to aevr Registry!"
+        subtitle="Your components are ready to use"
+        variant="success"
+        
+        icon={<Package className="w-5 h-5" />}
         actions={[
-          { name: "Get Started", type: "primary" }
+          { name: "Get Started", type: "primary", path: "/docs" },
+          { name: "View Examples", type: "secondary", path: "/examples" }
         ]}
-      />
-      
-      <Button variant="primary" className="mt-4">
-        Buy for {price}
-      </Button>
+      >
+        <InfoBox 
+          type="success"
+          description="All aevr components are now available in your project."
+        />
+        
+        <Button variant="primary" className="mt-4">
+          Buy for {price}
+        </Button>
+      </Card>
     </div>
   );
 }`}</CodeBlock>
               </div>
-            </div>
+            </Card>
           </div>
         )}
 
@@ -470,41 +530,42 @@ export default function Page() {
               </p>
             </div>
 
-            <div className="grid gap-6">
+            <CardGrid cols={1} spacing="normal">
               {components.map((component) => (
-                <div
+                <Card
                   key={component.name}
-                  className="bg-white rounded-xl p-6 shadow-sm border"
+                  title={component.title}
+                  subtitle={component.description}
+                  badge={
+                    <span className="bg-gray-100 text-gray-600 px-2 py-1 rounded-md text-xs font-mono">
+                      {component.name}
+                    </span>
+                  }
+                  variant="default"
+                  horizontal={true}
+                  actions={[
+                    {
+                      name: "Install",
+                      type: "primary",
+                      onClick: () => {
+                        navigator.clipboard.writeText(
+                          `npx shadcn@latest add --registry @aevr ${component.name}`
+                        );
+                      },
+                    },
+                    {
+                      name: "View Docs",
+                      type: "secondary",
+                      path: `/docs/components/${component.name}`,
+                    },
+                  ]}
                 >
-                  <div className="grid lg:grid-cols-2 gap-6">
-                    <div>
-                      <div className="flex items-center gap-3 mb-3">
-                        <h3 className="text-xl font-semibold">
-                          {component.title}
-                        </h3>
-                        <span className="bg-gray-100 text-gray-600 px-2 py-1 rounded-md text-xs font-mono">
-                          {component.name}
-                        </span>
-                      </div>
-                      <p className="text-gray-600 mb-4">
-                        {component.description}
-                      </p>
-
-                      <div className="space-y-3">
-                        <h4 className="font-medium text-sm text-gray-800">
-                          Installation:
-                        </h4>
-                        <CodeBlock>{`npx shadcn@latest add --registry @aevr ${component.name}`}</CodeBlock>
-                      </div>
-                    </div>
-
-                    <div className="bg-gray-50 rounded-lg p-6 flex items-center justify-center min-h-[150px]">
-                      {component.preview}
-                    </div>
+                  <div className="bg-gray-50 rounded-2xl p-4 flex items-center justify-center min-h-[120px] w-full">
+                    {component.preview}
                   </div>
-                </div>
+                </Card>
               ))}
-            </div>
+            </CardGrid>
           </div>
         )}
 
@@ -520,20 +581,30 @@ export default function Page() {
               </p>
             </div>
 
-            <div className="grid gap-6">
+            <CardGrid cols={1} spacing="normal">
               {utils.map((util) => (
-                <div
+                <Card
                   key={util.name}
-                  className="bg-white rounded-xl p-6 shadow-sm border"
-                >
-                  <div className="flex items-center gap-3 mb-3">
-                    <h3 className="text-xl font-semibold">{util.title}</h3>
+                  title={util.title}
+                  subtitle={util.description}
+                  badge={
                     <span className="bg-gray-100 text-gray-600 px-2 py-1 rounded-md text-xs font-mono">
                       {util.name}
                     </span>
-                  </div>
-                  <p className="text-gray-600 mb-4">{util.description}</p>
-
+                  }
+                  variant="default"
+                  actions={[
+                    {
+                      name: "Install",
+                      type: "primary",
+                      onClick: () => {
+                        navigator.clipboard.writeText(
+                          `npx shadcn@latest add --registry @aevr ${util.name}`
+                        );
+                      },
+                    },
+                  ]}
+                >
                   <div className="grid md:grid-cols-2 gap-6">
                     <div>
                       <h4 className="font-medium text-sm text-gray-800 mb-3">
@@ -578,91 +649,87 @@ formatNumber(1234.567, { maximumFractionDigits: 2 }); // "1,234.57"
 formatCardNumber("1234567890123456", { mask: true }); // "**** **** **** 3456"`}</CodeBlock>
                     </div>
                   )}
-                </div>
+                </Card>
               ))}
-            </div>
+            </CardGrid>
           </div>
         )}
 
-        {/* Features Section */}
-        <div className="mt-16 bg-gradient-to-r from-blue-500 to-purple-600 rounded-2xl p-8 text-white">
+        {/* Features Section using Cards */}
+        <div className="mt-16">
           <div className="text-center mb-8">
             <h2 className="text-3xl font-bold mb-4">
-              Why Choose AEVR Registry?
+              Why Choose aevr Registry?
             </h2>
-            <p className="text-blue-100 max-w-2xl mx-auto">
+            <p className="text-gray-600 max-w-2xl mx-auto">
               Built with modern development practices and designed for
               production use.
             </p>
           </div>
 
-          <div className="grid md:grid-cols-3 gap-6">
-            <div className="text-center">
-              <div className="w-12 h-12 bg-white/20 rounded-xl flex items-center justify-center mx-auto mb-4">
-                <Shield className="w-6 h-6" />
-              </div>
-              <h3 className="font-semibold mb-2">Production Ready</h3>
-              <p className="text-blue-100 text-sm">
-                Thoroughly tested components ready for production use
-              </p>
-            </div>
+          <CardGrid cols={3} spacing="normal">
+            <Card
+              title="Production Ready"
+              subtitle="Thoroughly tested components ready for production use"
+              icon={<Shield className="w-6 h-6" />}
+              variant="primary"
+              elevation="floating"
+            />
 
-            <div className="text-center">
-              <div className="w-12 h-12 bg-white/20 rounded-xl flex items-center justify-center mx-auto mb-4">
-                <Zap className="w-6 h-6" />
-              </div>
-              <h3 className="font-semibold mb-2">Easy Integration</h3>
-              <p className="text-blue-100 text-sm">
-                Seamless integration with existing shadcn/ui projects
-              </p>
-            </div>
+            <Card
+              title="Easy Integration"
+              subtitle="Seamless integration with existing shadcn/ui projects"
+              icon={<Zap className="w-6 h-6" />}
+              variant="success"
+              elevation="floating"
+            />
 
-            <div className="text-center">
-              <div className="w-12 h-12 bg-white/20 rounded-xl flex items-center justify-center mx-auto mb-4">
-                <Package className="w-6 h-6" />
-              </div>
-              <h3 className="font-semibold mb-2">Customizable</h3>
-              <p className="text-blue-100 text-sm">
-                Built with CVA for easy customization and theming
-              </p>
-            </div>
-          </div>
+            <Card
+              title="Customizable"
+              subtitle="Built with CVA for easy customization and theming"
+              icon={<Package className="w-6 h-6" />}
+              variant="info"
+              elevation="floating"
+            />
+          </CardGrid>
         </div>
 
         {/* Getting Help */}
-        <div className="mt-12 bg-gray-50 rounded-xl p-8 border">
+        <div className="mt-12">
           <h3 className="text-2xl font-bold mb-6 text-center">Need Help?</h3>
 
-          <div className="grid md:grid-cols-2 gap-6">
-            <div className="bg-white rounded-lg p-6 border">
-              <h4 className="font-semibold mb-3 flex items-center gap-2">
-                <ExternalLink className="w-4 h-4" />
-                Documentation
-              </h4>
-              <p className="text-gray-600 text-sm mb-4">
-                Check out the shadcn/ui documentation for general guidance on
-                using components.
-              </p>
-              <Button variant="secondary" size="sm">
-                View Docs
-                <ArrowRight className="w-4 h-4" />
-              </Button>
-            </div>
+          <CardGrid cols={2} spacing="normal">
+            <Card
+              title="Documentation"
+              subtitle="Check out the shadcn/ui documentation for general guidance on using components"
+              icon={<ExternalLink className="w-4 h-4" />}
+              variant="default"
+              actions={[
+                {
+                  name: "View Docs",
+                  type: "secondary",
+                  path: "/docs",
+                  icon: <ArrowRight className="w-4 h-4" />,
+                },
+              ]}
+            />
 
-            <div className="bg-white rounded-lg p-6 border">
-              <h4 className="font-semibold mb-3 flex items-center gap-2">
-                <Github className="w-4 h-4" />
-                Issues & Support
-              </h4>
-              <p className="text-gray-600 text-sm mb-4">
-                Found a bug or have a feature request? Let us know on GitHub.
-              </p>
-              <Button variant="secondary" size="sm">
-                GitHub Issues
-                <ArrowRight className="w-4 h-4" />
-              </Button>
-            </div>
-          </div>
+            <Card
+              title="Issues & Support"
+              subtitle="Found a bug or have a feature request? Let us know on GitHub"
+              icon={<Github className="w-4 h-4" />}
+              variant="default"
+              actions={[
+                {
+                  name: "GitHub Issues",
+                  type: "secondary",
+                  path: "https://github.com/aevr/registry/issues",
+                  external: true,
+                  icon: <ArrowRight className="w-4 h-4" />,
+                },
+              ]}
+            />
+          </CardGrid>
         </div>
       </main>
 
@@ -672,7 +739,7 @@ formatCardNumber("1234567890123456", { mask: true }); // "**** **** **** 3456"`}
           <div className="flex flex-col md:flex-row items-center justify-between">
             <div className="flex items-center gap-2 mb-4 md:mb-0">
               <Package className="w-5 h-5 text-blue-600" />
-              <span className="font-semibold">AEVR Registry</span>
+              <span className="font-semibold">aevr Registry</span>
             </div>
 
             <div className="flex items-center gap-4 text-sm text-gray-600">

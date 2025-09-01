@@ -43,7 +43,7 @@
   --radius-lg: var(--radius);
   --radius-xl: calc(var(--radius) + 4px);
 
-  /* AEVR UI Custom Colors */
+  /* aevr UI Custom Colors */
   --color-tw-payred-50: oklch(0.985 0.01 27);
   --color-tw-payred-100: oklch(0.97 0.02 27);
   --color-tw-payred-200: oklch(0.94 0.04 27);

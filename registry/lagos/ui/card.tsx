@@ -450,13 +450,16 @@ const Card = forwardRef<HTMLDivElement, CardProps>(
 
       const content = (
         <>
-          {action.icon && action.iconStart && (
-            <span className="icon">{action.icon}</span>
-          )}
+          {action.icon &&
+            action.iconStart &&
+            // <span className="icon">{action.icon}</span>
+            action.icon}
           <span>{action.name}</span>
-          {action.icon && !action.iconStart && (
-            <span className="icon">{action.icon}</span>
-          )}
+          {action.icon &&
+            !action.iconStart &&
+            // <span className="icon">{action.icon}</span>
+            // add the "icon" class to the action.icon directly instead of wrapping within a span
+            action.icon}
         </>
       );
 
