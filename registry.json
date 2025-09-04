@@ -79,6 +79,35 @@
       ]
     },
     {
+      "name": "use-persisted-state",
+      "type": "registry:hook",
+      "title": "Use Persisted State",
+      "description": "A hook for persisting state in local storage.",
+      "files": [
+        {
+          "path": "registry/lagos/hooks/use-persisted-state.ts",
+          "type": "registry:hook",
+          "target": "hooks/aevr/use-persisted-state.ts"
+        }
+      ],
+      "dependencies": ["@untools/logger", "zustand"]
+    },
+    {
+      "name": "status",
+      "type": "registry:hook",
+      "title": "Status",
+      "description": "A hook for managing status states and messages.",
+      "registryDependencies": ["@aevr/use-persisted-state"],
+      "files": [
+        {
+          "path": "registry/lagos/hooks/use-status.ts",
+          "type": "registry:hook",
+          "target": "hooks/aevr/use-status.ts"
+        }
+      ],
+      "dependencies": ["@untools/logger"]
+    },
+    {
       "name": "number-formatter",
       "type": "registry:lib",
       "title": "Number Formatter",

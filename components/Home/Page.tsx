@@ -15,6 +15,7 @@ import {
   Github,
   Download,
   Settings,
+  Briefcase,
 } from "lucide-react";
 import { Button } from "@/registry/lagos/ui/button";
 import { InfoBox } from "@/registry/lagos/ui/info-box";
@@ -84,7 +85,7 @@ const CodeBlock: React.FC<{ children: string; title?: string }> = ({
 
 export default function HomePage() {
   const [selectedTab, setSelectedTab] = useState<
-    "quick-start" | "components" | "utils"
+    "quick-start" | "components" | "hooks" | "utils"
   >("quick-start");
 
   const components = [
@@ -154,6 +155,33 @@ export default function HomePage() {
           }}
         />
       ),
+    },
+  ];
+
+  const hooks = [
+    {
+      name: "use-persisted-state",
+      title: "Use Persisted State",
+      description:
+        "A hook for persisting state in local storage. Useful for saving user preferences, settings, and more.",
+      features: [
+        "Local storage persistence",
+        "Global storage persistence",
+        "Persistent state management",
+        "Persistence options",
+      ],
+    },
+    {
+      name: "use-status",
+      title: "Use Status",
+      description:
+        "A hook for managing status states and messages. Useful for displaying loading states, error messages, and more.",
+      features: [
+        "Status state management",
+        "Status message management",
+        "Status aggregation",
+        "Persistence options",
+      ],
     },
   ];
 
@@ -239,6 +267,7 @@ export default function HomePage() {
           {[
             { id: "quick-start", label: "Quick Start", icon: Zap },
             { id: "components", label: "Components", icon: Package },
+            { id: "hooks", label: "Hooks", icon: Briefcase },
             { id: "utils", label: "Utilities", icon: Code },
           ].map(({ id, label, icon: Icon }) => (
             <button
@@ -554,6 +583,75 @@ export default function Page() {
                 >
                   <div className="bg-gray-50 dark:bg-gray-800 rounded-2xl p-4 flex items-center justify-center min-h-[120px] w-full">
                     {component.preview}
+                  </div>
+                </Card>
+              ))}
+            </CardGrid>
+          </div>
+        )}
+
+        {/* Hooks Tab */}
+        {selectedTab === "hooks" && (
+          <div className="space-y-6">
+            <div className="text-center mb-8">
+              <h2 className="text-3xl font-bold mb-4 dark:text-gray-100">
+                Hooks
+              </h2>
+              <p className="text-gray-600 dark:text-gray-400 max-w-2xl mx-auto">
+                Hooks are a powerful way to manage state and side effects in
+                React applications. They allow you to share stateful logic
+                across components and enhance the reusability of your code.
+              </p>
+            </div>
+
+            <CardGrid cols={1} spacing="normal">
+              {hooks.map((hook) => (
+                <Card
+                  key={hook.name}
+                  title={hook.title}
+                  subtitle={hook.description}
+                  badge={
+                    <span className="bg-gray-100 dark:bg-gray-800 text-gray-600 dark:text-gray-400 px-2 py-1 rounded-md text-xs font-mono">
+                      {hook.name}
+                    </span>
+                  }
+                  variant="default"
+                  actions={[
+                    {
+                      name: "Install",
+                      type: "primary",
+                      onClick: () => {
+                        navigator.clipboard.writeText(
+                          `npx shadcn@latest add @aevr/${hook.name}`
+                        );
+                      },
+                    },
+                  ]}
+                >
+                  <div className="grid md:grid-cols-2 gap-6">
+                    <div>
+                      <h4 className="font-medium text-sm text-gray-800 dark:text-gray-200 mb-3">
+                        Features:
+                      </h4>
+                      <ul className="space-y-2">
+                        {hook.features.map((feature, index) => (
+                          <li
+                            key={index}
+                            className="flex items-center gap-2 text-sm text-gray-600 dark:text-gray-400"
+                          >
+                            <Check className="w-4 h-4 text-green-500 dark:text-green-400" />
+                            {feature}
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+
+                    <div>
+                      <h4 className="font-medium text-sm text-gray-800 dark:text-gray-200 mb-3">
+                        Installation:
+                      </h4>
+                      <CodeBlock>{`npx shadcn@latest add @aevr/${hook.name}`}</CodeBlock>
+                    </div>
                   </div>
                 </Card>
               ))}
