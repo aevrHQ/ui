@@ -939,10 +939,10 @@ const cloudinaryProvider = new CloudinaryProvider(
               <span>Powered by Next.js</span>
               <span>•</span>
               <a
-                href="https://v1.ui.aevr.space"
+                href="https://aevr.space"
                 className="hover:text-blue-600 dark:hover:text-blue-400 transition-colors"
               >
-                v1.ui.aevr.space
+                aevr.space
               </a>
             </div>
           </div>
