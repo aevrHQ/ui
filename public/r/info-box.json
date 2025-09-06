@@ -5,8 +5,8 @@
   "title": "Info Box",
   "description": "A simple info box component for displaying information, warnings, errors, loading states, and status messages.",
   "registryDependencies": [
-    "button",
-    "loader"
+    "@aevr/button",
+    "@aevr/loader"
   ],
   "files": [
     {

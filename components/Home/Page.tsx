@@ -23,6 +23,8 @@ import Loader from "@/registry/lagos/ui/loader";
 import SummaryCard from "@/registry/lagos/ui/summary-card";
 import { Card, CardGrid } from "@/registry/lagos/ui/card";
 import Link from "next/link";
+import useShare from "@/registry/lagos/hooks/use-share";
+import FileUpload from "@/registry/lagos/ui/file-upload";
 
 // Copy button component
 const CopyButton: React.FC<{ text: string; className?: string }> = ({
@@ -30,10 +32,11 @@ const CopyButton: React.FC<{ text: string; className?: string }> = ({
   className,
 }) => {
   const [copied, setCopied] = useState(false);
+  const { copy } = useShare();
 
   const handleCopy = async () => {
     try {
-      await navigator.clipboard.writeText(text);
+      await copy(text);
       setCopied(true);
       setTimeout(() => setCopied(false), 2000);
     } catch (err) {
@@ -156,6 +159,12 @@ export default function HomePage() {
         />
       ),
     },
+    {
+      name: "file-upload",
+      title: "File Upload",
+      description: "File upload component",
+      preview: <FileUpload onFilesChange={() => {}} />,
+    },
   ];
 
   const hooks = [
@@ -183,6 +192,18 @@ export default function HomePage() {
         "Persistence options",
       ],
     },
+    {
+      name: "use-share",
+      title: "Use Share",
+      description:
+        "A hook for sharing content and copying text to clipboard. Supports Web Share API with fallback to clipboard.",
+      features: [
+        "Copy text to clipboard",
+        "Share content via Web Share API",
+        "Share files with native sharing",
+        "Loading states for operations",
+      ],
+    },
   ];
 
   const utils = [
@@ -196,6 +217,18 @@ export default function HomePage() {
         "Number formatting",
         "Card number masking",
         "Locale support",
+      ],
+    },
+    {
+      name: "upload-providers",
+      title: "Upload Providers",
+      description:
+        "Collection of upload providers for various cloud storage services including S3, Cloudinary, Supabase, Firebase, and more",
+      features: [
+        "Multiple provider support",
+        "Provider factory pattern",
+        "Multi-provider uploads",
+        "Upload queue management",
       ],
     },
   ];
@@ -652,6 +685,45 @@ export default function Page() {
                       </h4>
                       <CodeBlock>{`npx shadcn@latest add @aevr/${hook.name}`}</CodeBlock>
                     </div>
+
+                    {hook.name === "use-share" && (
+                      <div className="mt-6 pt-6 border-t dark:border-gray-700">
+                        <h4 className="font-medium text-sm text-gray-800 dark:text-gray-200 mb-3">
+                          Usage Example:
+                        </h4>
+                        <CodeBlock>{`import useShare from "@/hooks/use-share";
+
+function ShareButton() {
+  const { copy, shareContent, isCopying, isSharing } = useShare();
+
+  const handleCopy = () => {
+    copy("https://example.com", {
+      successMessage: "Link copied!",
+      errorMessage: "Failed to copy link"
+    });
+  };
+
+  const handleShare = () => {
+    shareContent("https://example.com", {
+      title: "Check this out!",
+      description: "Amazing content to share",
+      fallbackCopy: true
+    });
+  };
+
+  return (
+    <div>
+      <button onClick={handleCopy} disabled={isCopying}>
+        {isCopying ? "Copying..." : "Copy Link"}
+      </button>
+      <button onClick={handleShare} disabled={isSharing}>
+        {isSharing ? "Sharing..." : "Share"}
+      </button>
+    </div>
+  );
+}`}</CodeBlock>
+                      </div>
+                    )}
                   </div>
                 </Card>
               ))}
@@ -723,12 +795,15 @@ export default function Page() {
                     </div>
                   </div>
 
-                  {util.name === "number-formatter" && (
-                    <div className="mt-6 pt-6 border-t dark:border-gray-700">
-                      <h4 className="font-medium text-sm text-gray-800 dark:text-gray-200 mb-3">
-                        Usage Examples:
-                      </h4>
-                      <CodeBlock>{`import { formatCurrency, formatNumber, formatCardNumber } from "@/utils/number-formatter";
+                  {(util.name === "number-formatter" ||
+                    util.name === "upload-providers") && (
+                    <>
+                      {util.name === "number-formatter" && (
+                        <div className="mt-6 pt-6 border-t dark:border-gray-700">
+                          <h4 className="font-medium text-sm text-gray-800 dark:text-gray-200 mb-3">
+                            Usage Examples:
+                          </h4>
+                          <CodeBlock>{`import { formatCurrency, formatNumber, formatCardNumber } from "@/utils/number-formatter";
 
 // Currency formatting
 formatCurrency(1234.56, { currency: "USD" }); // "$1,234.56"
@@ -739,7 +814,37 @@ formatNumber(1234.567, { maximumFractionDigits: 2 }); // "1,234.57"
 
 // Card number formatting with masking
 formatCardNumber("1234567890123456", { mask: true }); // "**** **** **** 3456"`}</CodeBlock>
-                    </div>
+                        </div>
+                      )}
+                      {util.name === "upload-providers" && (
+                        <div className="mt-6 pt-6 border-t dark:border-gray-700">
+                          <h4 className="font-medium text-sm text-gray-800 dark:text-gray-200 mb-3">
+                            Usage Examples:
+                          </h4>
+                          <CodeBlock>{`import { S3Provider, CloudinaryProvider, SupabaseProvider } from "@/utils/upload-providers";
+import { FileUpload } from "@/components/ui/file-upload";
+
+// S3 Provider
+const s3Provider = new S3Provider(
+  process.env.NEXT_PUBLIC_S3_ENDPOINT,
+  process.env.NEXT_PUBLIC_S3_API_KEY
+);
+
+// Cloudinary Provider  
+const cloudinaryProvider = new CloudinaryProvider(
+  process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME,
+  process.env.NEXT_PUBLIC_CLOUDINARY_API_KEY
+);
+
+// Use with FileUpload component
+<FileUpload
+  onFilesChange={(files) => console.log(files)}
+  provider={s3Provider}
+  uploadOptions={{ folder: "documents" }}
+/>`}</CodeBlock>
+                        </div>
+                      )}
+                    </>
                   )}
                 </Card>
               ))}

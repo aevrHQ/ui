@@ -1,0 +1,15 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "cloudinary-uploader",
+  "type": "registry:lib",
+  "title": "Cloudinary Uploader",
+  "description": "A utility function for uploading files to Cloudinary.",
+  "files": [
+    {
+      "path": "registry/lagos/utils/cloudinary-uploader.ts",
+      "content": "// ./registry/lagos/utils/cloudinary-uploader.ts\n\nconst CLOUD_NAME = process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME;\nconst CLOUDINARY_API_KEY = process.env.NEXT_PUBLIC_CLOUDINARY_API_KEY;\n\nconst uploadToCloudinary = async ({\n  file,\n  preset,\n}: {\n  file: File;\n  preset: string;\n}) => {\n  const formData = new FormData();\n  formData.append(\"file\", file);\n  formData.append(\"upload_preset\", preset);\n  formData.append(\"api_key\", CLOUDINARY_API_KEY as string);\n\n  const res = await fetch(\n    `https://api.cloudinary.com/v1_1/${CLOUD_NAME}/image/upload`,\n    {\n      method: \"POST\",\n      body: formData,\n    }\n  );\n\n  const data = await res.json();\n\n  return data;\n};\n\nexport default uploadToCloudinary;\n",
+      "type": "registry:hook",
+      "target": "utils/aevr/cloudinary-uploader.ts"
+    }
+  ]
+}

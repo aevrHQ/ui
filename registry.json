@@ -28,7 +28,7 @@
       "type": "registry:component",
       "title": "Info Box",
       "description": "A simple info box component for displaying information, warnings, errors, loading states, and status messages.",
-      "registryDependencies": ["button", "loader"],
+      "registryDependencies": ["@aevr/button", "@aevr/loader"],
       "files": [
         {
           "path": "registry/lagos/ui/info-box.tsx",
@@ -61,6 +61,21 @@
           "path": "registry/lagos/ui/summary-card.tsx",
           "type": "registry:component",
           "target": "components/ui/aevr/summary-card.tsx"
+        }
+      ]
+    },
+    {
+      "name": "file-upload",
+      "type": "registry:component",
+      "title": "File Upload",
+      "description": "A simple file upload component",
+      "dependencies": ["@untools/logger", "sonner", "iconsax-react"],
+      "registryDependencies": ["@aevr/s3-uploader"],
+      "files": [
+        {
+          "path": "registry/lagos/ui/file-upload.tsx",
+          "type": "registry:component",
+          "target": "components/ui/aevr/file-upload.tsx"
         }
       ]
     },
@@ -106,6 +121,61 @@
         }
       ],
       "dependencies": ["@untools/logger"]
+    },
+    {
+      "name": "use-share",
+      "type": "registry:hook",
+      "title": "Use Share",
+      "description": "A hook for sharing data.",
+      "files": [
+        {
+          "path": "registry/lagos/hooks/use-share.ts",
+          "type": "registry:hook",
+          "target": "hooks/aevr/use-share.ts"
+        }
+      ],
+      "dependencies": ["@untools/logger", "sonner"]
+    },
+    {
+      "name": "s3-uploader",
+      "type": "registry:lib",
+      "title": "S3 Uploader",
+      "description": "A utility function for uploading files to S3.",
+      "files": [
+        {
+          "path": "registry/lagos/utils/s3-uploader.ts",
+          "type": "registry:lib",
+          "target": "utils/aevr/s3-uploader.ts"
+        }
+      ],
+      "dependencies": ["@untools/logger", "aws-sdk"]
+    },
+    {
+      "name": "cloudinary-uploader",
+      "type": "registry:lib",
+      "title": "Cloudinary Uploader",
+      "description": "A utility function for uploading files to Cloudinary.",
+      "files": [
+        {
+          "path": "registry/lagos/utils/cloudinary-uploader.ts",
+          "type": "registry:hook",
+          "target": "utils/aevr/cloudinary-uploader.ts"
+        }
+      ]
+    },
+    {
+      "name": "upload-providers",
+      "type": "registry:lib",
+      "title": "Upload Providers",
+      "description": "A utility function for creating upload providers.",
+      "files": [
+        {
+          "path": "registry/lagos/utils/upload-providers.ts",
+          "type": "registry:lib",
+          "target": "utils/aevr/upload-providers.ts"
+        }
+      ],
+      "dependencies": ["@aevr/file-upload"]
     },
     {
       "name": "number-formatter",

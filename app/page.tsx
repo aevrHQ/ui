@@ -6,6 +6,10 @@ export const metadata = {
     "A collection of beautiful, accessible, and production-ready components built on top of shadcn/ui. Get started in seconds.",
 };
 
-const Page = () => <HomePage />;
+const Page = () => (
+  <>
+    <HomePage />
+  </>
+);
 
 export default Page;
