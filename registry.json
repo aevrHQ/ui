@@ -48,7 +48,8 @@
           "type": "registry:component",
           "target": "components/ui/aevr/loader.tsx"
         }
-      ]
+      ],
+      "dependencies": ["motion"]
     },
     {
       "name": "summary-card",

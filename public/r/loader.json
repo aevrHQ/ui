@@ -4,6 +4,9 @@
   "type": "registry:component",
   "title": "Loader",
   "description": "A simple loader component for displaying loading states.",
+  "dependencies": [
+    "motion"
+  ],
   "files": [
     {
       "path": "registry/lagos/ui/loader.tsx",
