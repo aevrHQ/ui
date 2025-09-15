@@ -108,10 +108,10 @@
       "dependencies": ["@untools/logger", "zustand"]
     },
     {
-      "name": "status",
+      "name": "use-status",
       "type": "registry:hook",
-      "title": "Status",
-      "description": "A hook for managing status states and messages.",
+      "title": "Use Status",
+      "description": "A hook for managing status states and messages",
       "registryDependencies": ["@aevr/use-persisted-state"],
       "files": [
         {
