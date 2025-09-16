@@ -157,7 +157,7 @@
       "description": "A hook for persisting state in local storage.",
       "files": [
         {
-          "path": "registry/lagos/hooks/use-persisted-state.ts",
+          "path": "registry/hooks/use-persisted-state.ts",
           "type": "registry:hook",
           "target": "hooks/aevr/use-persisted-state.ts"
         }
@@ -172,7 +172,7 @@
       "registryDependencies": ["@aevr/use-persisted-state"],
       "files": [
         {
-          "path": "registry/lagos/hooks/use-status.ts",
+          "path": "registry/hooks/use-status.ts",
           "type": "registry:hook",
           "target": "hooks/aevr/use-status.ts"
         }
@@ -186,7 +186,7 @@
       "description": "A hook for sharing data.",
       "files": [
         {
-          "path": "registry/lagos/hooks/use-share.ts",
+          "path": "registry/hooks/use-share.ts",
           "type": "registry:hook",
           "target": "hooks/aevr/use-share.ts"
         }
@@ -200,7 +200,7 @@
       "description": "A hook for detecting media query matches.",
       "files": [
         {
-          "path": "registry/lagos/hooks/use-media-query.ts",
+          "path": "registry/hooks/use-media-query.ts",
           "type": "registry:hook",
           "target": "hooks/aevr/use-media-query.ts"
         }
@@ -213,7 +213,7 @@
       "description": "A utility function for uploading files to S3.",
       "files": [
         {
-          "path": "registry/lagos/utils/s3-uploader.ts",
+          "path": "registry/utils/s3-uploader.ts",
           "type": "registry:lib",
           "target": "utils/aevr/s3-uploader.ts"
         }
@@ -227,7 +227,7 @@
       "description": "A utility function for uploading files to Cloudinary.",
       "files": [
         {
-          "path": "registry/lagos/utils/cloudinary-uploader.ts",
+          "path": "registry/utils/cloudinary-uploader.ts",
           "type": "registry:hook",
           "target": "utils/aevr/cloudinary-uploader.ts"
         }
@@ -240,7 +240,7 @@
       "description": "A utility function for creating upload providers.",
       "files": [
         {
-          "path": "registry/lagos/utils/upload-providers.ts",
+          "path": "registry/utils/upload-providers.ts",
           "type": "registry:lib",
           "target": "utils/aevr/upload-providers.ts"
         }
@@ -254,7 +254,7 @@
       "description": "A utility function for formatting numbers and currencies.",
       "files": [
         {
-          "path": "registry/lagos/utils/number-formatter.ts",
+          "path": "registry/utils/number-formatter.ts",
           "type": "registry:lib",
           "target": "utils/aevr/number-formatter.ts"
         }
@@ -268,7 +268,7 @@
       "description": "A utility function for formatting dates and times.",
       "files": [
         {
-          "path": "registry/lagos/utils/date-formatter.ts",
+          "path": "registry/utils/date-formatter.ts",
           "type": "registry:lib",
           "target": "utils/aevr/date-formatter.ts"
         }

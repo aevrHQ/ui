@@ -4,7 +4,7 @@ import React, { ReactNode } from "react";
 import {
   formatCurrency,
   formatNumber,
-} from "@/registry/lagos/utils/number-formatter";
+} from "@/registry/utils/number-formatter";
 
 export interface SummaryItem {
   label: string;

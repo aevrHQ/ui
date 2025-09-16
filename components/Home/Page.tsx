@@ -23,7 +23,7 @@ import Loader from "@/registry/lagos/ui/loader";
 import SummaryCard from "@/registry/lagos/ui/summary-card";
 import { Card, CardGrid } from "@/registry/lagos/ui/card";
 import Link from "next/link";
-import useShare from "@/registry/lagos/hooks/use-share";
+import useShare from "@/registry/hooks/use-share";
 import FileUpload from "@/registry/lagos/ui/file-upload";
 import { ScrollArea } from "@/registry/lagos/ui/scroll-area";
 import {

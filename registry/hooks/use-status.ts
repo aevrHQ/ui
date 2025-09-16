@@ -1,6 +1,6 @@
 // ./registry/lagos/hooks/use-status/index.ts
 import { useState, useCallback, useRef, useMemo } from "react";
-import { usePersistedState } from "@/registry/lagos/hooks/use-persisted-state";
+import { usePersistedState } from "@/registry/hooks/use-persisted-state";
 import { logger } from "@untools/logger";
 
 export type StatusState = "loading" | "success" | "error" | "warning" | "idle";

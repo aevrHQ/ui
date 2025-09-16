@@ -577,17 +577,17 @@ export interface ProviderConfig {
 }
 
 // Import types for dynamic imports
-type S3ProviderClass = typeof import("../ui/file-upload").S3Provider;
+type S3ProviderClass = typeof import("../lagos/ui/file-upload").S3Provider;
 type CloudinaryProviderClass =
-  typeof import("../ui/file-upload").CloudinaryProvider;
+  typeof import("../lagos/ui/file-upload").CloudinaryProvider;
 type CustomAPIProviderClass =
-  typeof import("../ui/file-upload").CustomAPIProvider;
+  typeof import("../lagos/ui/file-upload").CustomAPIProvider;
 
 export class ProviderFactory {
   static async create(providerConfig: ProviderConfig): Promise<UploadProvider> {
     switch (providerConfig.type) {
       case "s3": {
-        const { S3Provider } = await import("../ui/file-upload");
+        const { S3Provider } = await import("../lagos/ui/file-upload");
         return new (S3Provider as unknown as S3ProviderClass)(
           providerConfig.config.baseUrl as string,
           providerConfig.config.apiKey as string
@@ -595,7 +595,7 @@ export class ProviderFactory {
       }
 
       case "cloudinary": {
-        const { CloudinaryProvider } = await import("../ui/file-upload");
+        const { CloudinaryProvider } = await import("../lagos/ui/file-upload");
         return new (CloudinaryProvider as unknown as CloudinaryProviderClass)(
           providerConfig.config.cloudName as string,
           providerConfig.config.apiKey as string
@@ -644,7 +644,7 @@ export class ProviderFactory {
         return new Base64Provider();
 
       case "custom": {
-        const { CustomAPIProvider } = await import("../ui/file-upload");
+        const { CustomAPIProvider } = await import("../lagos/ui/file-upload");
         return new (CustomAPIProvider as unknown as CustomAPIProviderClass)(
           providerConfig.config.endpoint as string,
           providerConfig.config.headers as Record<string, string>

@@ -22,7 +22,7 @@ import {
   DrawerTitle,
   DrawerTrigger,
 } from "@/registry/lagos/ui/drawer";
-import { useMediaQuery } from "@/registry/lagos/hooks/use-media-query";
+import { useMediaQuery } from "@/registry/hooks/use-media-query";
 import { ScrollArea } from "@/registry/lagos/ui/scroll-area";
 
 export interface ResponsiveDialogProps {
