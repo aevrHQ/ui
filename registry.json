@@ -95,6 +95,62 @@
       ]
     },
     {
+      "name": "responsive-dialog",
+      "type": "registry:component",
+      "title": "Responsive Dialog",
+      "description": "A responsive dialog component for mobile and desktop.",
+      "registryDependencies": ["dialog", "drawer", "scroll-area"],
+      "files": [
+        {
+          "path": "registry/lagos/ui/responsive-dialog.tsx",
+          "type": "registry:component",
+          "target": "components/ui/aevr/responsive-dialog.tsx"
+        }
+      ]
+    },
+    {
+      "name": "scroll-area",
+      "type": "registry:component",
+      "title": "Scroll Area",
+      "description": "A scroll area component for overflow scrolling.",
+      "files": [
+        {
+          "path": "registry/lagos/ui/scroll-area.tsx",
+          "type": "registry:component",
+          "target": "components/ui/aevr/scroll-area.tsx"
+        }
+      ],
+      "dependencies": ["@radix-ui/react-scroll-area"]
+    },
+    {
+      "name": "dialog",
+      "type": "registry:component",
+      "title": "Dialog",
+      "description": "A dialog component for modal interactions.",
+      "files": [
+        {
+          "path": "registry/lagos/ui/dialog.tsx",
+          "type": "registry:component",
+          "target": "components/ui/aevr/dialog.tsx"
+        }
+      ],
+      "dependencies": ["@radix-ui/react-dialog", "iconsax-react"]
+    },
+    {
+      "name": "drawer",
+      "type": "registry:component",
+      "title": "Drawer",
+      "description": "A drawer component for mobile and desktop.",
+      "files": [
+        {
+          "path": "registry/lagos/ui/drawer.tsx",
+          "type": "registry:component",
+          "target": "components/ui/aevr/drawer.tsx"
+        }
+      ],
+      "dependencies": ["vaul"]
+    },
+    {
       "name": "use-persisted-state",
       "type": "registry:hook",
       "title": "Use Persisted State",
@@ -136,6 +192,19 @@
         }
       ],
       "dependencies": ["@untools/logger", "sonner"]
+    },
+    {
+      "name": "use-media-query",
+      "type": "registry:hook",
+      "title": "Use Media Query",
+      "description": "A hook for detecting media query matches.",
+      "files": [
+        {
+          "path": "registry/lagos/hooks/use-media-query.ts",
+          "type": "registry:hook",
+          "target": "hooks/aevr/use-media-query.ts"
+        }
+      ]
     },
     {
       "name": "s3-uploader",

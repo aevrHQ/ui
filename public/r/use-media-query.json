@@ -1,0 +1,15 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "use-media-query",
+  "type": "registry:hook",
+  "title": "Use Media Query",
+  "description": "A hook for detecting media query matches.",
+  "files": [
+    {
+      "path": "registry/lagos/hooks/use-media-query.ts",
+      "content": "// ./registry/lagos/hooks/use-media-query.ts\n\nimport { useState, useEffect } from \"react\";\n\n// Custom hook to detect media query matches\nexport function useMediaQuery(query: string): boolean {\n  // Initialize state to track the current match status of the query\n  const [matches, setMatches] = useState<boolean>(false);\n\n  useEffect(() => {\n    // Create a MediaQueryList object\n    const mediaQueryList = window.matchMedia(query);\n\n    // Update state with the current match status\n    const documentChangeHandler = () => setMatches(mediaQueryList.matches);\n\n    // Listen for changes to the media query status\n    mediaQueryList.addEventListener(\"change\", documentChangeHandler);\n\n    // Set the initial value\n    setMatches(mediaQueryList.matches);\n\n    // Cleanup event listener on component unmount\n    return () => {\n      mediaQueryList.removeEventListener(\"change\", documentChangeHandler);\n    };\n  }, [query]); // Only re-run the effect if the query changes\n\n  return matches;\n}\n",
+      "type": "registry:hook",
+      "target": "hooks/aevr/use-media-query.ts"
+    }
+  ]
+}

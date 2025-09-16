@@ -25,6 +25,22 @@ import { Card, CardGrid } from "@/registry/lagos/ui/card";
 import Link from "next/link";
 import useShare from "@/registry/lagos/hooks/use-share";
 import FileUpload from "@/registry/lagos/ui/file-upload";
+import { ScrollArea } from "@/registry/lagos/ui/scroll-area";
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogTitle,
+  DialogTrigger,
+} from "@/registry/lagos/ui/dialog";
+import {
+  Drawer,
+  DrawerContent,
+  DrawerDescription,
+  DrawerTitle,
+  DrawerTrigger,
+} from "@/registry/lagos/ui/drawer";
+import ResponsiveDialog from "@/registry/lagos/ui/responsive-dialog";
 
 // Copy button component
 const CopyButton: React.FC<{ text: string; className?: string }> = ({
@@ -164,6 +180,58 @@ export default function HomePage() {
       title: "File Upload",
       description: "File upload component",
       preview: <FileUpload onFilesChange={() => {}} />,
+    },
+    {
+      name: "scroll-area",
+      title: "Scroll Area",
+      description: "A scroll area component for overflow scrolling.",
+      preview: (
+        <ScrollArea>
+          <div className="h-96 w-60">Scroll me</div>
+        </ScrollArea>
+      ),
+    },
+    {
+      name: "dialog",
+      title: "Dialog",
+      description: "A dialog component for modal dialogs.",
+      preview: (
+        <Dialog>
+          <DialogTrigger>Open Dialog</DialogTrigger>
+          <DialogContent>
+            <DialogTitle>Dialog Title</DialogTitle>
+            <DialogDescription>Dialog Description</DialogDescription>
+          </DialogContent>
+        </Dialog>
+      ),
+    },
+    {
+      name: "drawer",
+      title: "Drawer",
+      description: "A drawer component for modal dialogs.",
+      preview: (
+        <Drawer>
+          <DrawerTrigger>Open Drawer</DrawerTrigger>
+          <DrawerContent>
+            <DrawerTitle>Drawer Title</DrawerTitle>
+            <DrawerDescription>Drawer Description</DrawerDescription>
+          </DrawerContent>
+        </Drawer>
+      ),
+    },
+    {
+      name: "responsive-dialog",
+      title: "Responsive Dialog",
+      description: "A responsive dialog component for mobile and desktop.",
+      preview: (
+        <ResponsiveDialog
+          title="Responsive Dialog"
+          description="This is a responsive dialog component for mobile and desktop."
+          trigger={<Button>Open Dialog</Button>}
+        >
+          <p>This is the content of the dialog.</p>
+        </ResponsiveDialog>
+      ),
     },
   ];
 

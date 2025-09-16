@@ -1,0 +1,20 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "responsive-dialog",
+  "type": "registry:component",
+  "title": "Responsive Dialog",
+  "description": "A responsive dialog component for mobile and desktop.",
+  "registryDependencies": [
+    "dialog",
+    "drawer",
+    "scroll-area"
+  ],
+  "files": [
+    {
+      "path": "registry/lagos/ui/responsive-dialog.tsx",
+      "content": "// ./registry/lagos/ui/responsive-dialog.tsx\n\n\"use client\";\n\nimport React, { ReactNode, useEffect, useState } from \"react\";\n\nimport {\n  Dialog,\n  DialogContent,\n  DialogDescription,\n  DialogHeader,\n  DialogTitle,\n  DialogTrigger,\n} from \"@/registry/lagos/ui/dialog\";\nimport {\n  Drawer,\n  DrawerClose,\n  DrawerContent,\n  DrawerDescription,\n  DrawerFooter,\n  DrawerHeader,\n  DrawerTitle,\n  DrawerTrigger,\n} from \"@/registry/lagos/ui/drawer\";\nimport { useMediaQuery } from \"@/registry/lagos/hooks/use-media-query\";\nimport { ScrollArea } from \"@/registry/lagos/ui/scroll-area\";\n\nexport interface ResponsiveDialogProps {\n  title?: string | null;\n  description?: string | null;\n  drawerClose?: ReactNode;\n  trigger?: ReactNode;\n  children?: ReactNode;\n  openPrompt?: boolean;\n  onOpenPromptChange?: (open?: boolean) => void;\n}\n\nconst ResponsiveDialog: React.FC<ResponsiveDialogProps> = ({\n  children,\n  trigger,\n  openPrompt,\n  title,\n  description,\n  drawerClose,\n  onOpenPromptChange,\n}) => {\n  const [open, setOpen] = useState(openPrompt);\n  const isDesktop = useMediaQuery(\"(min-width: 768px)\");\n\n  useEffect(() => {\n    setOpen(openPrompt);\n  }, [openPrompt]);\n\n  useEffect(() => {\n    if (onOpenPromptChange) {\n      onOpenPromptChange(open);\n    }\n  }, [open]);\n\n  if (isDesktop) {\n    return (\n      <Dialog open={open} onOpenChange={setOpen}>\n        <DialogTrigger asChild>{trigger}</DialogTrigger>\n        <DialogContent\n          className={`max-h-[90vh] max-w-4xl ${\n            title != null || description != null ? \"\" : \"gap-0\"\n          }`}\n        >\n          <DialogHeader className=\"px-2\">\n            {title != null && <DialogTitle>{title || \"Heads Up!\"}</DialogTitle>}\n            {description != null && (\n              <DialogDescription>\n                {description ||\n                  \"Here's some important information or action you need to review and take\"}\n              </DialogDescription>\n            )}\n          </DialogHeader>\n          <ScrollArea className=\"max-h-[calc(90vh-5.35rem)]\">\n            {children}\n          </ScrollArea>\n        </DialogContent>\n      </Dialog>\n    );\n  }\n\n  return (\n    <Drawer shouldScaleBackground open={open} onOpenChange={setOpen}>\n      <DrawerTrigger asChild>{trigger}</DrawerTrigger>\n      <DrawerContent className=\"max-h-[95%]\">\n        <div className=\"wrapper overflow-y-auto\">\n          <DrawerHeader\n            className={`text-left ${\n              title != null || description != null ? \"p-6\" : \"p-0\"\n            }`}\n          >\n            {title != null && <DrawerTitle>{title || \"Heads Up!\"}</DrawerTitle>}\n            {description != null && (\n              <DrawerDescription>\n                {description ||\n                  \"Here's some important information or action you need to review and take\"}\n              </DrawerDescription>\n            )}\n          </DrawerHeader>\n          <div className=\"px-4\">{children}</div>\n          <DrawerFooter className=\"flex flex-row gap-4\">\n            <DrawerClose asChild>{drawerClose}</DrawerClose>\n          </DrawerFooter>\n        </div>\n      </DrawerContent>\n    </Drawer>\n  );\n};\n\nexport default ResponsiveDialog;\n",
+      "type": "registry:component",
+      "target": "components/ui/aevr/responsive-dialog.tsx"
+    }
+  ]
+}
