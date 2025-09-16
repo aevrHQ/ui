@@ -231,6 +231,12 @@ export default function HomePage() {
         "Upload queue management",
       ],
     },
+    {
+      name: "date-formatter",
+      title: "Date Formatter",
+      description: "Format dates and times with locale support",
+      features: ["Date formatting", "Time formatting", "Locale support"],
+    },
   ];
 
   return (

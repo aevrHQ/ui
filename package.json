@@ -15,6 +15,8 @@
     "@untools/logger": "^0.0.6",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
+    "date-fns": "^4.1.0",
+    "date-fns-tz": "^3.2.0",
     "iconsax-react": "^0.0.8",
     "iso-country-currency": "^0.7.2",
     "lucide-react": "^0.487.0",

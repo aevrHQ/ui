@@ -191,6 +191,20 @@
         }
       ],
       "dependencies": ["iso-country-currency", "@untools/logger"]
+    },
+    {
+      "name": "date-formatter",
+      "type": "registry:lib",
+      "title": "Date Formatter",
+      "description": "A utility function for formatting dates and times.",
+      "files": [
+        {
+          "path": "registry/lagos/utils/date-formatter.ts",
+          "type": "registry:lib",
+          "target": "utils/aevr/date-formatter.ts"
+        }
+      ],
+      "dependencies": ["@untools/logger", "date-fns", "date-fns-tz"]
     }
   ]
 }
