@@ -7,7 +7,8 @@
   "registryDependencies": [
     "dialog",
     "drawer",
-    "scroll-area"
+    "scroll-area",
+    "@aevr/use-media-query"
   ],
   "files": [
     {

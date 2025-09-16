@@ -99,7 +99,12 @@
       "type": "registry:component",
       "title": "Responsive Dialog",
       "description": "A responsive dialog component for mobile and desktop.",
-      "registryDependencies": ["dialog", "drawer", "scroll-area"],
+      "registryDependencies": [
+        "dialog",
+        "drawer",
+        "scroll-area",
+        "@aevr/use-media-query"
+      ],
       "files": [
         {
           "path": "registry/lagos/ui/responsive-dialog.tsx",
