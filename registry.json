@@ -279,6 +279,19 @@
         }
       ],
       "dependencies": ["@untools/logger", "date-fns", "date-fns-tz"]
+    },
+    {
+      "name": "http-client",
+      "type": "registry:lib",
+      "title": "HTTP Client",
+      "description": "A generic, reusable HTTP client with simplified header management, multiple configuration patterns, lifecycle hooks, and flexible response handling.",
+      "files": [
+        {
+          "path": "registry/utils/http-client.ts",
+          "type": "registry:lib",
+          "target": "utils/aevr/http-client.ts"
+        }
+      ]
     }
   ]
 }

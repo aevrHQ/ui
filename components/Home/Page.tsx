@@ -276,6 +276,20 @@ export default function HomePage() {
 
   const utils = [
     {
+      name: "http-client",
+      title: "HTTP Client",
+      description:
+        "A generic, reusable HTTP client with simplified header management, multiple configuration patterns, lifecycle hooks, and flexible response handling.",
+      features: [
+        "Simplified Header Management",
+        "Multiple Configuration Patterns",
+        "Lifecycle Hooks for logging/monitoring",
+        "Flexible Response Handling",
+        "Configurable retries with exponential backoff",
+        "Timeout support",
+      ],
+    },
+    {
       name: "number-formatter",
       title: "Number Formatter",
       description:
@@ -869,6 +883,36 @@ function ShareButton() {
                     </div>
                   </div>
 
+                  {util.name === "http-client" && (
+                    <div className="mt-6 pt-6 border-t dark:border-gray-700">
+                      <h4 className="font-medium text-sm text-gray-800 dark:text-gray-200 mb-3">
+                        Usage Examples:
+                      </h4>
+                      <CodeBlock>{`import { createHttpClient } from "@/utils/http-client";
+
+// Standard Bearer token
+const client = createHttpClient.withAuth(token, { baseUrl: 'https://api.example.com' });
+
+// API Key
+const client = createHttpClient.withApiKey(key, 'X-API-Key');
+
+// Your custom auth pattern
+const client = createHttpClient.withCustomAuth(authToken, appId);
+
+// Or configure manually
+const client = new HttpClient({
+  baseUrl: 'https://api.example.com',
+  headers: { 'Authorization': 'Bearer token' }
+});`}</CodeBlock>
+                      <CodeBlock>{`const client = new HttpClient({
+  onRequest: (url, options) => console.log('Requesting:', url),
+  onResponse: (response) => console.log('Response:', response.status),
+  onError: (error) => console.error('Error:', error.message)
+});`}</CodeBlock>
+                      <CodeBlock>{`// Make a GET request
+const { data } = await client.get('/users');`}</CodeBlock>
+                    </div>
+                  )}
                   {(util.name === "number-formatter" ||
                     util.name === "upload-providers") && (
                     <>
