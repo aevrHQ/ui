@@ -163,7 +163,8 @@
       "files": [
         {
           "path": "registry/lagos/ui/empty-state.tsx",
-          "type": "registry:ui"
+          "type": "registry:ui",
+          "target": "components/ui/aevr/empty-state.tsx"
         }
       ]
     },
