@@ -159,7 +159,7 @@
       "name": "empty-state",
       "type": "registry:ui",
       "dependencies": ["iconsax-react", "class-variance-authority"],
-      "registryDependencies": ["card", "button"],
+      "registryDependencies": ["@aevr/card", "@aevr/button"],
       "files": [
         {
           "path": "registry/lagos/ui/empty-state.tsx",
