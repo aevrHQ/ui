@@ -156,6 +156,18 @@
       "dependencies": ["vaul"]
     },
     {
+      "name": "empty-state",
+      "type": "registry:ui",
+      "dependencies": ["iconsax-react", "class-variance-authority"],
+      "registryDependencies": ["card", "button"],
+      "files": [
+        {
+          "path": "registry/lagos/ui/empty-state.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
       "name": "use-persisted-state",
       "type": "registry:hook",
       "title": "Use Persisted State",

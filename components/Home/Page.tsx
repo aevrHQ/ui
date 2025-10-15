@@ -41,6 +41,7 @@ import {
   DrawerTrigger,
 } from "@/registry/lagos/ui/drawer";
 import ResponsiveDialog from "@/registry/lagos/ui/responsive-dialog";
+import EmptyStateExamples from "../Example/EmptyState";
 
 // Copy button component
 const CopyButton: React.FC<{ text: string; className?: string }> = ({
@@ -232,6 +233,13 @@ export default function HomePage() {
           <p>This is the content of the dialog.</p>
         </ResponsiveDialog>
       ),
+    },
+    {
+      name: "empty-state",
+      title: "Empty State",
+      description:
+        "A component for displaying empty states with optional actions.",
+      preview: <EmptyStateExamples />,
     },
   ];
 
