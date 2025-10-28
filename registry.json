@@ -305,6 +305,20 @@
           "target": "utils/aevr/http-client.ts"
         }
       ]
+    },
+    {
+      "name": "multi-tag-input",
+      "type": "registry:component",
+      "title": "Multi Tag Input",
+      "description": "A reusable multi-tag input component that allows users to add, edit, and remove tags through an intuitive interface with keyboard interactions and visual feedback",
+      "dependencies": ["iconsax-react", "class-variance-authority"],
+      "files": [
+        {
+          "path": "registry/lagos/ui/multi-tag-input.tsx",
+          "type": "registry:component",
+          "target": "components/ui/aevr/multi-tag-input.tsx"
+        }
+      ]
     }
   ]
 }

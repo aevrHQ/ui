@@ -42,6 +42,7 @@ import {
 } from "@/registry/lagos/ui/drawer";
 import ResponsiveDialog from "@/registry/lagos/ui/responsive-dialog";
 import EmptyStateExamples from "../Example/EmptyState";
+import { MultiTagInput } from "@/registry/lagos/ui/multi-tag-input";
 
 // Copy button component
 const CopyButton: React.FC<{ text: string; className?: string }> = ({
@@ -240,6 +241,15 @@ export default function HomePage() {
       description:
         "A component for displaying empty states with optional actions.",
       preview: <EmptyStateExamples />,
+    },
+    {
+      name: "multi-tag-input",
+      title: "Multi Tag Input",
+      description:
+        "A reusable multi-tag input component with keyboard interactions and visual feedback",
+      preview: (
+        <MultiTagInput placeholder="Add tags..." maxTags={5} size="sm" />
+      ),
     },
   ];
 

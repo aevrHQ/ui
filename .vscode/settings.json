@@ -11,5 +11,6 @@
   "editor.quickSuggestions": {
     "strings": true
   },
-  "tailwindCSS.classAttributes": ["class", "className", "classList"]
+  "tailwindCSS.classAttributes": ["class", "className", "classList"],
+  "kiroAgent.configureMCP": "Disabled"
 }
