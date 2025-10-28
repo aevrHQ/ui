@@ -48,7 +48,8 @@
  * Features:
  * - Add tags by typing and pressing Enter or comma
  * - Remove tags by clicking the X button
- * - Edit tags by clicking on the tag text
+ * - Edit tags by clicking on the tag text (edit-in-place)
+ * - Drag and drop to reorder tags
  * - Duplicate prevention (case-sensitive)
  * - Configurable tag limits
  * - Form integration support
@@ -57,9 +58,11 @@
  * - CVA variants for consistent styling
  *
  * Keyboard Interactions:
- * - Enter/Comma: Create new tag from input
- * - Click tag text: Edit existing tag
+ * - Enter/Comma: Create new tag from input or save edited tag
+ * - Escape: Cancel editing mode
+ * - Click tag text: Edit existing tag in-place
  * - Click X button: Remove tag
+ * - Drag tag: Reorder tags by dragging and dropping
  * - Tab: Navigate away from component
  *
  * Accessibility:
@@ -237,31 +240,111 @@ export interface TagProps extends VariantProps<typeof tagVariants> {
    * @example disabled={true}
    */
   disabled?: boolean;
+
+  /**
+   * Index of the tag for drag and drop operations
+   * @example index={0}
+   */
+  index?: number;
+
+  /**
+   * Callback function called when dragging starts
+   * @example onDragStart={(index) => setDraggedIndex(index)}
+   */
+  onDragStart?: (index: number) => void;
+
+  /**
+   * Callback function called when dropping on this tag
+   * @example onDrop={(draggedIndex, targetIndex) => reorderTags(draggedIndex, targetIndex)}
+   */
+  onDrop?: (draggedIndex: number, targetIndex: number) => void;
+
+  /**
+   * Whether this tag is currently being dragged
+   * @default false
+   */
+  isDragging?: boolean;
 }
 
 const Tag = React.forwardRef<HTMLDivElement, TagProps>(
   (
-    { children, onRemove, onEdit, size, className, disabled, ...props },
+    {
+      children,
+      onRemove,
+      onEdit,
+      size,
+      className,
+      disabled,
+      index = 0,
+      onDragStart,
+      onDrop,
+      isDragging = false,
+      ...props
+    },
     ref
   ) => {
+    const [dragOver, setDragOver] = React.useState(false);
+
+    const handleDragStart = (e: React.DragEvent) => {
+      if (disabled) return;
+      e.dataTransfer.effectAllowed = "move";
+      e.dataTransfer.setData("text/plain", index.toString());
+      onDragStart?.(index);
+    };
+
+    const handleDragOver = (e: React.DragEvent) => {
+      if (disabled) return;
+      e.preventDefault();
+      e.dataTransfer.dropEffect = "move";
+      setDragOver(true);
+    };
+
+    const handleDragLeave = () => {
+      setDragOver(false);
+    };
+
+    const handleDrop = (e: React.DragEvent) => {
+      if (disabled) return;
+      e.preventDefault();
+      setDragOver(false);
+      const draggedIndex = parseInt(e.dataTransfer.getData("text/plain"));
+      if (draggedIndex !== index) {
+        onDrop?.(draggedIndex, index);
+      }
+    };
+
     return (
       <div
         ref={ref}
+        draggable={!disabled}
+        onDragStart={handleDragStart}
+        onDragOver={handleDragOver}
+        onDragLeave={handleDragLeave}
+        onDrop={handleDrop}
         className={cn(
           tagVariants({ size, className }),
-          disabled && "opacity-50"
+          disabled && "opacity-50",
+          isDragging && "opacity-50 scale-95",
+          dragOver && "ring-2 ring-blue-300 ring-offset-1",
+          !disabled && "cursor-move hover:shadow-md transition-all duration-200"
         )}
         {...props}
       >
         <span
-          onClick={disabled ? undefined : onEdit}
+          onClick={(e) => {
+            e.stopPropagation();
+            if (!disabled) onEdit();
+          }}
           className={disabled ? "cursor-default" : "cursor-pointer"}
         >
           {children}
         </span>
         <button
           type="button"
-          onClick={disabled ? undefined : onRemove}
+          onClick={(e) => {
+            e.stopPropagation();
+            if (!disabled) onRemove();
+          }}
           disabled={disabled}
           className={cn(
             "ml-2 text-gray-500 rounded-full p-0.5 transition-all duration-200",
@@ -271,7 +354,7 @@ const Tag = React.forwardRef<HTMLDivElement, TagProps>(
           )}
           aria-label={`Remove ${children} tag`}
         >
-          <CloseCircle size={16} />
+          <CloseCircle color="red" variant="TwoTone" size={16} />
         </button>
       </div>
     );
@@ -402,10 +485,26 @@ Tag.displayName = "Tag";
  *       value={tags}
  *       onChange={handleTagsChange}
  *       label="Project Tags"
- *       description="Add descriptive tags for your project"
+ *       description="Add descriptive tags for your project. Drag to reorder, click to edit."
  *       error={error}
  *       maxTags={15}
  *       placeholder="e.g., web-development, react, typescript..."
+ *     />
+ *   );
+ * }
+ *
+ * @example
+ * // 7. Drag and Drop with Edit-in-Place Demo
+ * function DragDropExample() {
+ *   const [tags, setTags] = useState<string[]>(['React', 'TypeScript', 'Next.js', 'Tailwind']);
+ *
+ *   return (
+ *     <MultiTagInput
+ *       value={tags}
+ *       onChange={setTags}
+ *       label="Skills (Drag to Reorder)"
+ *       description="Click any tag to edit it in-place, or drag to reorder"
+ *       placeholder="Add more skills..."
  *     />
  *   );
  * }
@@ -431,6 +530,8 @@ const MultiTagInput = React.forwardRef<HTMLTextAreaElement, MultiTagInputProps>(
   ) => {
     const [internalTags, setInternalTags] = React.useState<string[]>([]);
     const [inputValue, setInputValue] = React.useState("");
+    const [editingIndex, setEditingIndex] = React.useState<number | null>(null);
+    const [draggedIndex, setDraggedIndex] = React.useState<number | null>(null);
     const textareaRef = React.useRef<HTMLTextAreaElement>(null);
 
     // Use controlled value if provided, otherwise use internal state
@@ -470,7 +571,7 @@ const MultiTagInput = React.forwardRef<HTMLTextAreaElement, MultiTagInputProps>(
       (index: number) => {
         if (disabled) return;
         const tagToEdit = tags[index];
-        removeTag(index);
+        setEditingIndex(index);
         setInputValue(tagToEdit);
 
         // Focus the input field when editing a tag
@@ -480,7 +581,19 @@ const MultiTagInput = React.forwardRef<HTMLTextAreaElement, MultiTagInputProps>(
           }
         }, 0);
       },
-      [tags, removeTag, disabled]
+      [tags, disabled]
+    );
+
+    const reorderTags = React.useCallback(
+      (draggedIndex: number, targetIndex: number) => {
+        if (disabled) return;
+        const newTags = [...tags];
+        const [draggedTag] = newTags.splice(draggedIndex, 1);
+        newTags.splice(targetIndex, 0, draggedTag);
+        updateTags(newTags);
+        setDraggedIndex(null);
+      },
+      [tags, updateTags, disabled]
     );
 
     const handleTagInput = React.useCallback(
@@ -493,6 +606,24 @@ const MultiTagInput = React.forwardRef<HTMLTextAreaElement, MultiTagInputProps>(
           // Trim whitespace and check for empty tags
           const trimmedValue = inputValue.trim();
           if (!trimmedValue) {
+            return;
+          }
+
+          // If we're editing a tag, update it in place
+          if (editingIndex !== null) {
+            // Check for duplicate tags (excluding the current editing tag)
+            const otherTags = tags.filter((_, i) => i !== editingIndex);
+            if (otherTags.includes(trimmedValue)) {
+              setInputValue("");
+              setEditingIndex(null);
+              return;
+            }
+
+            const newTags = [...tags];
+            newTags[editingIndex] = trimmedValue;
+            updateTags(newTags);
+            setInputValue("");
+            setEditingIndex(null);
             return;
           }
 
@@ -512,8 +643,14 @@ const MultiTagInput = React.forwardRef<HTMLTextAreaElement, MultiTagInputProps>(
           updateTags(newTags);
           setInputValue("");
         }
+
+        // Cancel editing on Escape
+        if (e.key === "Escape" && editingIndex !== null) {
+          setInputValue("");
+          setEditingIndex(null);
+        }
       },
-      [inputValue, tags, maxTags, updateTags, disabled]
+      [inputValue, tags, maxTags, updateTags, disabled, editingIndex]
     );
 
     return (
@@ -543,8 +680,12 @@ const MultiTagInput = React.forwardRef<HTMLTextAreaElement, MultiTagInputProps>(
                   key={`${tag}-${index}`}
                   size={size}
                   disabled={disabled}
+                  index={index}
+                  isDragging={draggedIndex === index}
                   onRemove={() => removeTag(index)}
                   onEdit={() => editTag(index)}
+                  onDragStart={setDraggedIndex}
+                  onDrop={reorderTags}
                 >
                   {tag}
                 </Tag>

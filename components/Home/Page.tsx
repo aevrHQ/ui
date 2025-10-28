@@ -246,9 +246,15 @@ export default function HomePage() {
       name: "multi-tag-input",
       title: "Multi Tag Input",
       description:
-        "A reusable multi-tag input component with keyboard interactions and visual feedback",
+        "A reusable multi-tag input component with drag-and-drop reordering and edit-in-place functionality",
       preview: (
-        <MultiTagInput placeholder="Add tags..." maxTags={5} size="sm" />
+        <div className="w-full">
+          <MultiTagInput
+            placeholder="Try adding tags..."
+            maxTags={5}
+            size="sm"
+          />
+        </div>
       ),
     },
   ];

@@ -12,5 +12,6 @@
     "strings": true
   },
   "tailwindCSS.classAttributes": ["class", "className", "classList"],
-  "kiroAgent.configureMCP": "Disabled"
+  "kiroAgent.configureMCP": "Disabled",
+  "typescript.autoClosingTags": false
 }
