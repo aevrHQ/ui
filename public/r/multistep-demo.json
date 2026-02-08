@@ -1,0 +1,21 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "multistep-demo",
+  "type": "registry:block",
+  "title": "Multistep Demo",
+  "description": "A demo for the multistep component.",
+  "registryDependencies": [
+    "multistep",
+    "input",
+    "label",
+    "button"
+  ],
+  "files": [
+    {
+      "path": "registry/lagos/blocks/multistep-demo.tsx",
+      "content": "\"use client\";\n\nimport React from \"react\";\nimport {\n  MinimalMultiStep,\n  MinimalStepProps,\n} from \"@/registry/lagos/ui/multistep\";\nimport { Button } from \"@/registry/lagos/ui/button\";\nimport { Input } from \"@/components/ui/input\";\nimport { Label } from \"@/registry/new-york/ui/label\";\n\ntype FormValues = {\n  firstName: string;\n  lastName: string;\n  email: string;\n};\n\nconst Step1 = ({ values, setValues, next }: MinimalStepProps<FormValues>) => {\n  return (\n    <div className=\"space-y-4\">\n      <div className=\"grid gap-2\">\n        <Label htmlFor=\"firstName\">First Name</Label>\n        <Input\n          id=\"firstName\"\n          value={values.firstName}\n          onChange={(e) =>\n            setValues((prev) => ({ ...prev, firstName: e.target.value }))\n          }\n          placeholder=\"John\"\n        />\n      </div>\n      <div className=\"grid gap-2\">\n        <Label htmlFor=\"lastName\">Last Name</Label>\n        <Input\n          id=\"lastName\"\n          value={values.lastName}\n          onChange={(e) =>\n            setValues((prev) => ({ ...prev, lastName: e.target.value }))\n          }\n          placeholder=\"Doe\"\n        />\n      </div>\n      <Button onClick={next} className=\"w-full\">\n        Next\n      </Button>\n    </div>\n  );\n};\n\nconst Step2 = ({\n  values,\n  setValues,\n  next,\n  prev,\n}: MinimalStepProps<FormValues>) => {\n  return (\n    <div className=\"space-y-4\">\n      <div className=\"grid gap-2\">\n        <Label htmlFor=\"email\">Email</Label>\n        <Input\n          id=\"email\"\n          type=\"email\"\n          value={values.email}\n          onChange={(e) =>\n            setValues((prev) => ({ ...prev, email: e.target.value }))\n          }\n          placeholder=\"john.doe@example.com\"\n        />\n      </div>\n      <div className=\"flex gap-2\">\n        <Button variant=\"secondary\" onClick={prev} className=\"flex-1\">\n          Back\n        </Button>\n        <Button onClick={next} className=\"flex-1\">\n          Review\n        </Button>\n      </div>\n    </div>\n  );\n};\n\nconst Step3 = ({ values, prev }: MinimalStepProps<FormValues>) => {\n  return (\n    <div className=\"space-y-4\">\n      <div className=\"rounded-md bg-muted p-4\">\n        <h3 className=\"mb-2 font-semibold\">Summary</h3>\n        <dl className=\"space-y-1 text-sm\">\n          <div className=\"flex justify-between\">\n            <dt className=\"text-muted-foreground\">Name:</dt>\n            <dd>\n              {values.firstName} {values.lastName}\n            </dd>\n          </div>\n          <div className=\"flex justify-between\">\n            <dt className=\"text-muted-foreground\">Email:</dt>\n            <dd>{values.email}</dd>\n          </div>\n        </dl>\n      </div>\n      <Button variant=\"secondary\" onClick={prev} className=\"w-full\">\n        Back\n      </Button>\n      <Button className=\"w-full\" onClick={() => alert(\"Submitted!\")}>\n        Submit\n      </Button>\n    </div>\n  );\n};\n\nexport default function MultistepDemo() {\n  return (\n    <div className=\"mx-auto w-full max-w-md rounded-lg border p-6 shadow-sm\">\n      <MinimalMultiStep\n        title=\"Registration\"\n        description=\"Please fill out your simple details\"\n        steps={[Step1, Step2, Step3]}\n        initialValues={{\n          firstName: \"\",\n          lastName: \"\",\n          email: \"\",\n        }}\n        storageKey=\"demo-multistep\"\n      />\n    </div>\n  );\n}\n",
+      "type": "registry:block",
+      "target": "components/blocks/multistep-demo.tsx"
+    }
+  ]
+}

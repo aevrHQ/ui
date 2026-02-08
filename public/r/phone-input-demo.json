@@ -1,0 +1,18 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "phone-input-demo",
+  "type": "registry:block",
+  "title": "Phone Input Demo",
+  "description": "A demo for the phone input component.",
+  "registryDependencies": [
+    "phone-input"
+  ],
+  "files": [
+    {
+      "path": "registry/lagos/blocks/phone-input-demo.tsx",
+      "content": "\"use client\";\n\nimport React, { useState } from \"react\";\nimport { PhoneInput } from \"@/registry/lagos/ui/phone-input\";\n\nexport default function PhoneInputDemo() {\n  const [value, setValue] = useState(\"\");\n\n  return (\n    <div className=\"flex w-full flex-col items-center gap-4 rounded-lg border p-8 shadow-sm\">\n      <div className=\"w-full max-w-xs\">\n        <PhoneInput\n          value={value}\n          onChange={setValue}\n          defaultCountry=\"US\"\n          placeholder=\"Enter phone number\"\n        />\n      </div>\n      {value && (\n        <div className=\"text-center text-sm text-muted-foreground\">\n          Value: <span className=\"font-medium text-foreground\">{value}</span>\n        </div>\n      )}\n    </div>\n  );\n}\n",
+      "type": "registry:block",
+      "target": "components/blocks/phone-input-demo.tsx"
+    }
+  ]
+}

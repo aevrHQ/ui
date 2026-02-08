@@ -1,0 +1,18 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "currency-select-demo",
+  "type": "registry:block",
+  "title": "Currency Select Demo",
+  "description": "A demo for the currency select component.",
+  "registryDependencies": [
+    "currency-select"
+  ],
+  "files": [
+    {
+      "path": "registry/lagos/blocks/currency-select-demo.tsx",
+      "content": "\"use client\";\n\nimport React, { useState } from \"react\";\nimport { MinimalCurrencySelect } from \"@/registry/lagos/ui/currency-select\";\n\nexport default function CurrencySelectDemo() {\n  const [currency, setCurrency] = useState<string>(\"\");\n\n  return (\n    <div className=\"flex w-full flex-col items-center gap-4 rounded-lg border p-8 shadow-sm\">\n      <div className=\"w-full max-w-xs\">\n        <MinimalCurrencySelect\n          onChange={(c) => setCurrency(c)}\n          defaultValue=\"USD\"\n          placeholder=\"Select currency\"\n        />\n      </div>\n      {currency && (\n        <div className=\"text-center text-sm text-muted-foreground\">\n          Selected Currency:{\" \"}\n          <span className=\"font-medium text-foreground\">{currency}</span>\n        </div>\n      )}\n    </div>\n  );\n}\n",
+      "type": "registry:block",
+      "target": "components/blocks/currency-select-demo.tsx"
+    }
+  ]
+}

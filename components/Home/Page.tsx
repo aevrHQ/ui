@@ -43,6 +43,10 @@ import {
 import ResponsiveDialog from "@/registry/lagos/ui/responsive-dialog";
 import EmptyStateExamples from "../Example/EmptyState";
 import { MultiTagInput } from "@/registry/lagos/ui/multi-tag-input";
+import CountryDropdownDemo from "@/registry/lagos/blocks/country-dropdown-demo";
+import CurrencySelectDemo from "@/registry/lagos/blocks/currency-select-demo";
+import PhoneInputDemo from "@/registry/lagos/blocks/phone-input-demo";
+import MultistepDemo from "@/registry/lagos/blocks/multistep-demo";
 
 // Copy button component
 const CopyButton: React.FC<{ text: string; className?: string }> = ({
@@ -256,6 +260,30 @@ export default function HomePage() {
           />
         </div>
       ),
+    },
+    {
+      name: "country-dropdown",
+      title: "Country Dropdown",
+      description: "A dropdown component for selecting countries with flags.",
+      preview: <CountryDropdownDemo />,
+    },
+    {
+      name: "currency-select",
+      title: "Currency Select",
+      description: "A minimal currency selection component.",
+      preview: <CurrencySelectDemo />,
+    },
+    {
+      name: "phone-input",
+      title: "Phone Input",
+      description: "A phone number input component with country selector.",
+      preview: <PhoneInputDemo />,
+    },
+    {
+      name: "multistep",
+      title: "Multistep",
+      description: "A multi-step form component.",
+      preview: <MultistepDemo />,
     },
   ];
 
@@ -715,7 +743,7 @@ export default function Page() {
                       type: "primary",
                       onClick: () => {
                         navigator.clipboard.writeText(
-                          `npx shadcn@latest add @aevr/${component.name}`
+                          `npx shadcn@latest add @aevr/${component.name}`,
                         );
                       },
                     },
@@ -767,7 +795,7 @@ export default function Page() {
                       type: "primary",
                       onClick: () => {
                         navigator.clipboard.writeText(
-                          `npx shadcn@latest add @aevr/${hook.name}`
+                          `npx shadcn@latest add @aevr/${hook.name}`,
                         );
                       },
                     },
@@ -875,7 +903,7 @@ function ShareButton() {
                       type: "primary",
                       onClick: () => {
                         navigator.clipboard.writeText(
-                          `npx shadcn@latest add @aevr/${util.name}`
+                          `npx shadcn@latest add @aevr/${util.name}`,
                         );
                       },
                     },

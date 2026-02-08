@@ -1,0 +1,18 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "country-dropdown-demo",
+  "type": "registry:block",
+  "title": "Country Dropdown Demo",
+  "description": "A demo for the country dropdown component.",
+  "registryDependencies": [
+    "country-dropdown"
+  ],
+  "files": [
+    {
+      "path": "registry/lagos/blocks/country-dropdown-demo.tsx",
+      "content": "\"use client\";\n\nimport React, { useState } from \"react\";\nimport { CountryDropdown, Country } from \"@/registry/lagos/ui/country-dropdown\";\n\nexport default function CountryDropdownDemo() {\n  const [country, setCountry] = useState<Country | undefined>(undefined);\n\n  return (\n    <div className=\"flex w-full flex-col items-center gap-4 rounded-lg border p-8 shadow-sm\">\n      <div className=\"w-full max-w-xs\">\n        <CountryDropdown\n          onChange={(c) => setCountry(c)}\n          defaultValue=\"US\"\n          placeholder=\"Select a country\"\n        />\n      </div>\n      {country && (\n        <div className=\"text-center text-sm text-muted-foreground\">\n          Selected:{\" \"}\n          <span className=\"font-medium text-foreground\">{country.name}</span> (\n          {country.alpha2})\n        </div>\n      )}\n    </div>\n  );\n}\n",
+      "type": "registry:block",
+      "target": "components/blocks/country-dropdown-demo.tsx"
+    }
+  ]
+}

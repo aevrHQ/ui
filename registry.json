@@ -319,6 +319,142 @@
           "target": "components/ui/aevr/multi-tag-input.tsx"
         }
       ]
+    },
+    {
+      "name": "country-dropdown",
+      "type": "registry:component",
+      "title": "Country Dropdown",
+      "description": "A dropdown component for selecting countries with flags.",
+      "dependencies": [
+        "country-data-list",
+        "react-circle-flags",
+        "lucide-react",
+        "@radix-ui/react-popover",
+        "cmdk"
+      ],
+      "registryDependencies": ["button"],
+      "files": [
+        {
+          "path": "registry/lagos/ui/country-dropdown.tsx",
+          "type": "registry:component",
+          "target": "components/ui/aevr/country-dropdown.tsx"
+        }
+      ]
+    },
+    {
+      "name": "country-dropdown-demo",
+      "type": "registry:block",
+      "title": "Country Dropdown Demo",
+      "description": "A demo for the country dropdown component.",
+      "registryDependencies": ["country-dropdown"],
+      "files": [
+        {
+          "path": "registry/lagos/blocks/country-dropdown-demo.tsx",
+          "type": "registry:block",
+          "target": "components/blocks/country-dropdown-demo.tsx"
+        }
+      ]
+    },
+    {
+      "name": "currency-select",
+      "type": "registry:component",
+      "title": "Currency Select",
+      "description": "A minimal currency selection component.",
+      "dependencies": [
+        "iso-country-currency",
+        "lucide-react",
+        "@radix-ui/react-popover",
+        "cmdk"
+      ],
+      "files": [
+        {
+          "path": "registry/lagos/ui/currency-select.tsx",
+          "type": "registry:component",
+          "target": "components/ui/aevr/currency-select.tsx"
+        }
+      ]
+    },
+    {
+      "name": "currency-select-demo",
+      "type": "registry:block",
+      "title": "Currency Select Demo",
+      "description": "A demo for the currency select component.",
+      "registryDependencies": ["currency-select"],
+      "files": [
+        {
+          "path": "registry/lagos/blocks/currency-select-demo.tsx",
+          "type": "registry:block",
+          "target": "components/blocks/currency-select-demo.tsx"
+        }
+      ]
+    },
+    {
+      "name": "phone-input",
+      "type": "registry:component",
+      "title": "Phone Input",
+      "description": "A phone number input component with country selector.",
+      "dependencies": [
+        "react-phone-number-input",
+        "lucide-react",
+        "@radix-ui/react-popover",
+        "@radix-ui/react-scroll-area",
+        "cmdk"
+      ],
+      "registryDependencies": ["button", "input"],
+      "files": [
+        {
+          "path": "registry/lagos/ui/phone-input.tsx",
+          "type": "registry:component",
+          "target": "components/ui/aevr/phone-input.tsx"
+        }
+      ]
+    },
+    {
+      "name": "phone-input-demo",
+      "type": "registry:block",
+      "title": "Phone Input Demo",
+      "description": "A demo for the phone input component.",
+      "registryDependencies": ["phone-input"],
+      "files": [
+        {
+          "path": "registry/lagos/blocks/phone-input-demo.tsx",
+          "type": "registry:block",
+          "target": "components/blocks/phone-input-demo.tsx"
+        }
+      ]
+    },
+    {
+      "name": "multistep",
+      "type": "registry:component",
+      "title": "Multistep",
+      "description": "A multi-step form component.",
+      "dependencies": ["iconsax-react", "lucide-react"],
+      "registryDependencies": [
+        "@aevr/use-persisted-state",
+        "@aevr/use-status",
+        "button"
+      ],
+      "files": [
+        {
+          "path": "registry/lagos/ui/multistep.tsx",
+          "type": "registry:component",
+          "target": "components/ui/aevr/multistep.tsx"
+        }
+      ]
+    },
+    {
+      "name": "multistep-demo",
+      "type": "registry:block",
+      "title": "Multistep Demo",
+      "description": "A demo for the multistep component.",
+      "registryDependencies": ["multistep", "input", "label", "button"],
+      "files": [
+        {
+          "path": "registry/lagos/blocks/multistep-demo.tsx",
+          "type": "registry:block",
+          "target": "components/blocks/multistep-demo.tsx"
+        }
+      ]
     }
   ]
 }
