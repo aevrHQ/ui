@@ -27,7 +27,7 @@
     "iso-country-currency": "^0.7.2",
     "lucide-react": "^0.487.0",
     "motion": "^12.23.12",
-    "next": "15.3.1",
+    "next": "15.3.8",
     "next-themes": "^0.4.6",
     "nextjs-toploader": "^3.8.16",
     "react": "19.1.0",
