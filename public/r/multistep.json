@@ -6,7 +6,8 @@
   "description": "A multi-step form component.",
   "dependencies": [
     "iconsax-react",
-    "lucide-react"
+    "lucide-react",
+    "motion"
   ],
   "registryDependencies": [
     "@aevr/use-persisted-state",

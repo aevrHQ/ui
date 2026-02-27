@@ -15,6 +15,7 @@
       "type": "registry:component",
       "title": "Button",
       "description": "A simple button component",
+      "dependencies": ["@radix-ui/react-slot", "class-variance-authority"],
       "files": [
         {
           "path": "registry/lagos/ui/button.tsx",
@@ -28,6 +29,7 @@
       "type": "registry:component",
       "title": "Info Box",
       "description": "A simple info box component for displaying information, warnings, errors, loading states, and status messages.",
+      "dependencies": ["iconsax-react", "class-variance-authority"],
       "registryDependencies": ["@aevr/button", "@aevr/loader"],
       "files": [
         {
@@ -85,6 +87,7 @@
       "type": "registry:component",
       "title": "Card",
       "description": "A versatile card component with multiple variants, sizes, and interactive features",
+      "dependencies": ["iconsax-react", "class-variance-authority"],
       "registryDependencies": ["button"],
       "files": [
         {
@@ -263,7 +266,7 @@
           "target": "utils/aevr/upload-providers.ts"
         }
       ],
-      "dependencies": ["@aevr/file-upload"]
+      "registryDependencies": ["@aevr/file-upload"]
     },
     {
       "name": "number-formatter",
@@ -332,7 +335,7 @@
         "@radix-ui/react-popover",
         "cmdk"
       ],
-      "registryDependencies": ["button"],
+      "registryDependencies": ["button", "command", "popover"],
       "files": [
         {
           "path": "registry/lagos/ui/country-dropdown.tsx",
@@ -366,6 +369,7 @@
         "@radix-ui/react-popover",
         "cmdk"
       ],
+      "registryDependencies": ["command", "popover"],
       "files": [
         {
           "path": "registry/lagos/ui/currency-select.tsx",
@@ -400,7 +404,13 @@
         "@radix-ui/react-scroll-area",
         "cmdk"
       ],
-      "registryDependencies": ["button", "input"],
+      "registryDependencies": [
+        "button",
+        "input",
+        "command",
+        "popover",
+        "scroll-area"
+      ],
       "files": [
         {
           "path": "registry/lagos/ui/phone-input.tsx",
@@ -428,7 +438,7 @@
       "type": "registry:component",
       "title": "Multistep",
       "description": "A multi-step form component.",
-      "dependencies": ["iconsax-react", "lucide-react"],
+      "dependencies": ["iconsax-react", "lucide-react", "motion"],
       "registryDependencies": [
         "@aevr/use-persisted-state",
         "@aevr/use-status",

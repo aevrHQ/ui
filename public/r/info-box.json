@@ -4,6 +4,10 @@
   "type": "registry:component",
   "title": "Info Box",
   "description": "A simple info box component for displaying information, warnings, errors, loading states, and status messages.",
+  "dependencies": [
+    "iconsax-react",
+    "class-variance-authority"
+  ],
   "registryDependencies": [
     "@aevr/button",
     "@aevr/loader"

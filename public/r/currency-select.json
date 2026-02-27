@@ -10,6 +10,10 @@
     "@radix-ui/react-popover",
     "cmdk"
   ],
+  "registryDependencies": [
+    "command",
+    "popover"
+  ],
   "files": [
     {
       "path": "registry/lagos/ui/currency-select.tsx",

@@ -4,7 +4,7 @@
   "type": "registry:lib",
   "title": "Upload Providers",
   "description": "A utility function for creating upload providers.",
-  "dependencies": [
+  "registryDependencies": [
     "@aevr/file-upload"
   ],
   "files": [

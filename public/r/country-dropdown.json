@@ -12,7 +12,9 @@
     "cmdk"
   ],
   "registryDependencies": [
-    "button"
+    "button",
+    "command",
+    "popover"
   ],
   "files": [
     {

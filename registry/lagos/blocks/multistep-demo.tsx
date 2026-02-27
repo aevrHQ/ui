@@ -40,7 +40,7 @@ const Step1 = ({ values, setValues, next }: MinimalStepProps<FormValues>) => {
           placeholder="Doe"
         />
       </div>
-      <Button onClick={next} className="w-full">
+      <Button onClick={() => next()} className="w-full">
         Next
       </Button>
     </div>
@@ -71,7 +71,7 @@ const Step2 = ({
         <Button variant="secondary" onClick={prev} className="flex-1">
           Back
         </Button>
-        <Button onClick={next} className="flex-1">
+        <Button onClick={() => next()} className="flex-1">
           Review
         </Button>
       </div>

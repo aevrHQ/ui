@@ -13,7 +13,10 @@
   ],
   "registryDependencies": [
     "button",
-    "input"
+    "input",
+    "command",
+    "popover",
+    "scroll-area"
   ],
   "files": [
     {

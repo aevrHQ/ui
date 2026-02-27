@@ -4,6 +4,10 @@
   "type": "registry:component",
   "title": "Card",
   "description": "A versatile card component with multiple variants, sizes, and interactive features",
+  "dependencies": [
+    "iconsax-react",
+    "class-variance-authority"
+  ],
   "registryDependencies": [
     "button"
   ],
