@@ -1,5 +1,3 @@
-// ./components/ui/aevr/minimal-multistep.tsx
-
 "use client";
 
 import React, { useState, ReactNode, useCallback, useEffect } from "react";
@@ -7,11 +5,12 @@ import { usePersistedState } from "@/hooks/aevr/use-persisted-state";
 import { useStatus, StatusRecord } from "@/hooks/aevr/use-status";
 import { Button } from "@/registry/lagos/ui/button";
 import { ArrowLeft, Icon } from "iconsax-react";
+import { motion, AnimatePresence } from "motion/react";
 
 export interface MinimalStepProps<T = unknown> {
   values: T;
   setValues: (values: T | ((prev: T) => T)) => void;
-  next: () => void;
+  next: (values?: T) => void;
   prev: () => void;
   isFirst: boolean;
   isLast: boolean;
@@ -19,6 +18,10 @@ export interface MinimalStepProps<T = unknown> {
   setStatus: (key: string, item: unknown) => void;
   goToStep: (step: number) => void;
   isProcessing?: boolean;
+  stepInfo?: {
+    currentStep: number;
+    totalSteps: number;
+  };
 }
 
 interface MinimalMultiStepProps<T> {
@@ -61,6 +64,27 @@ export function MinimalMultiStep<T>({
   const isOpen = controlledOpen ?? internalOpen;
 
   const [currentStep, setCurrentStep] = useState(0);
+  const [direction, setDirection] = useState(0);
+
+  const variants = {
+    enter: (direction: number) => ({
+      x: direction > 0 ? 20 : -20,
+      opacity: 0,
+      filter: "blur(4px)",
+    }),
+    center: {
+      zIndex: 1,
+      x: 0,
+      opacity: 1,
+      filter: "blur(0px)",
+    },
+    exit: (direction: number) => ({
+      zIndex: 0,
+      x: direction < 0 ? 20 : -20,
+      opacity: 0,
+      filter: "blur(4px)",
+    }),
+  };
 
   // Conditional hook usage is tricky. We'll use both and pick one based on persist prop.
   // However, hooks cannot be conditional. So we always run both or refactor.
@@ -92,20 +116,25 @@ export function MinimalMultiStep<T>({
     namespace: storageKey,
   });
 
-  const next = useCallback(async () => {
-    if (currentStep < steps.length - 1) {
-      setCurrentStep((prev) => prev + 1);
-    } else {
-      if (onComplete) {
-        await onComplete(values);
+  const next = useCallback(
+    async (providedValues?: T) => {
+      if (currentStep < steps.length - 1) {
+        setDirection(1);
+        setCurrentStep((prev) => prev + 1);
+      } else {
+        if (onComplete) {
+          await onComplete(providedValues || values);
+        }
+        // Optional: close dialog on complete?
+        // setOpen(false);
       }
-      // Optional: close dialog on complete?
-      // setOpen(false);
-    }
-  }, [currentStep, steps.length, onComplete, values]);
+    },
+    [currentStep, steps.length, onComplete, values],
+  );
 
   const prev = useCallback(() => {
     if (currentStep > 0) {
+      setDirection(-1);
       setCurrentStep((prev) => prev - 1);
     }
   }, [currentStep]);
@@ -113,10 +142,11 @@ export function MinimalMultiStep<T>({
   const goToStep = useCallback(
     (step: number) => {
       if (step >= 0 && step < steps.length) {
+        setDirection(step > currentStep ? 1 : -1);
         setCurrentStep(step);
       }
     },
-    [steps.length],
+    [steps.length, currentStep],
   );
 
   const CurrentStepComponent = steps[currentStep];
@@ -140,7 +170,7 @@ export function MinimalMultiStep<T>({
               {title && <h2 className="text-lg font-semibold">{title}</h2>}
             </div>
             {description && (
-              <p className="text-sm text-muted-foreground">{description}</p>
+              <p className="text-muted-foreground text-sm">{description}</p>
             )}
           </div>
         ))}
@@ -162,7 +192,7 @@ export function MinimalMultiStep<T>({
             variant="ghost"
             size="sm"
             onClick={prev}
-            className="-ml-2 mb-2 text-muted-foreground hover:text-foreground"
+            className="text-muted-foreground hover:text-foreground mb-2 -ml-2"
             disabled={isProcessing}
           >
             <ArrowLeft
@@ -175,19 +205,38 @@ export function MinimalMultiStep<T>({
           </Button>
         )}
 
-        <CurrentStepComponent
-          {...stepProps}
-          values={values}
-          setValues={setValues}
-          next={next}
-          prev={prev}
-          isFirst={currentStep === 0}
-          isLast={currentStep === steps.length - 1}
-          status={status}
-          setStatus={setStatus as (key: string, item: unknown) => void}
-          goToStep={goToStep}
-          isProcessing={isProcessing}
-        />
+        <AnimatePresence mode="wait" custom={direction}>
+          <motion.div
+            key={currentStep}
+            custom={direction}
+            variants={variants}
+            initial="enter"
+            animate="center"
+            exit="exit"
+            transition={{
+              x: { type: "spring", stiffness: 300, damping: 30 },
+              opacity: { duration: 0.2 },
+            }}
+          >
+            <CurrentStepComponent
+              {...stepProps}
+              values={values}
+              setValues={setValues}
+              next={next}
+              prev={prev}
+              isFirst={currentStep === 0}
+              isLast={currentStep === steps.length - 1}
+              status={status}
+              setStatus={setStatus as (key: string, item: unknown) => void}
+              goToStep={goToStep}
+              isProcessing={isProcessing}
+              stepInfo={{
+                currentStep,
+                totalSteps: steps.length,
+              }}
+            />
+          </motion.div>
+        </AnimatePresence>
       </div>
     </>
   );
