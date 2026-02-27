@@ -47,6 +47,8 @@ import CountryDropdownDemo from "@/registry/lagos/blocks/country-dropdown-demo";
 import CurrencySelectDemo from "@/registry/lagos/blocks/currency-select-demo";
 import PhoneInputDemo from "@/registry/lagos/blocks/phone-input-demo";
 import MultistepDemo from "@/registry/lagos/blocks/multistep-demo";
+import SettingsCardDemo from "@/registry/lagos/blocks/settings-card-demo";
+import BlurredBackgroundDemo from "@/registry/lagos/blocks/blurred-background-demo";
 
 // Copy button component
 const CopyButton: React.FC<{ text: string; className?: string }> = ({
@@ -284,6 +286,18 @@ export default function HomePage() {
       title: "Multistep",
       description: "A multi-step form component.",
       preview: <MultistepDemo />,
+    },
+    {
+      name: "settings-card",
+      title: "Settings Card",
+      description: "A settings card layout component.",
+      preview: <SettingsCardDemo />,
+    },
+    {
+      name: "blurred-background",
+      title: "Blurred Background",
+      description: "A directionally blurred background component.",
+      preview: <BlurredBackgroundDemo />,
     },
   ];
 

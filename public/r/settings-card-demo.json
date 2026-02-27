@@ -1,0 +1,18 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "settings-card-demo",
+  "type": "registry:block",
+  "title": "Settings Card Demo",
+  "description": "A demo for the settings card component.",
+  "registryDependencies": [
+    "settings-card"
+  ],
+  "files": [
+    {
+      "path": "registry/lagos/blocks/settings-card-demo.tsx",
+      "content": "\"use client\";\n\nimport React from \"react\";\nimport {\n  SettingsCard,\n  SettingsCardHeader,\n  SettingsCardTitle,\n  SettingsCardDescription,\n  SettingsCardContent,\n  SettingsRow,\n  SettingsRowContent,\n  SettingsRowLabel,\n  SettingsRowValue,\n  SettingsRowAction,\n} from \"@/registry/lagos/ui/settings-card\";\n\nexport default function SettingsCardDemo() {\n  return (\n    <div className=\"flex w-full items-center justify-center p-8\">\n      <SettingsCard className=\"w-full max-w-lg\">\n        <SettingsCardHeader>\n          <SettingsCardTitle>Notifications</SettingsCardTitle>\n          <SettingsCardDescription>\n            Manage your notification preferences and how you want to be\n            contacted.\n          </SettingsCardDescription>\n        </SettingsCardHeader>\n        <SettingsCardContent>\n          <SettingsRow>\n            <SettingsRowContent>\n              <div>\n                <SettingsRowLabel>Email Notifications</SettingsRowLabel>\n                <SettingsRowValue>\n                  Receive daily email summaries of your activity.\n                </SettingsRowValue>\n              </div>\n            </SettingsRowContent>\n            <SettingsRowAction>\n              <div className=\"h-5 w-9 rounded-full bg-primary/20 p-0.5\">\n                <div className=\"h-4 w-4 rounded-full bg-primary\" />\n              </div>\n            </SettingsRowAction>\n          </SettingsRow>\n          <SettingsRow>\n            <SettingsRowContent>\n              <div>\n                <SettingsRowLabel>Push Notifications</SettingsRowLabel>\n                <SettingsRowValue>\n                  Get real-time alerts on your mobile device.\n                </SettingsRowValue>\n              </div>\n            </SettingsRowContent>\n            <SettingsRowAction>\n              <div className=\"h-5 w-9 rounded-full bg-muted p-0.5\">\n                <div className=\"h-4 w-4 rounded-full bg-background shadow-sm\" />\n              </div>\n            </SettingsRowAction>\n          </SettingsRow>\n        </SettingsCardContent>\n      </SettingsCard>\n    </div>\n  );\n}\n",
+      "type": "registry:block",
+      "target": "components/blocks/settings-card-demo.tsx"
+    }
+  ]
+}

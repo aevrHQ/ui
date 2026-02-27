@@ -1,0 +1,15 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "blurred-background",
+  "type": "registry:component",
+  "title": "Blurred Background",
+  "description": "A directionally blurred background component.",
+  "files": [
+    {
+      "path": "registry/lagos/ui/blurred-background.tsx",
+      "content": "\"use client\";\n\nimport React from \"react\";\n\ntype BlurDirection =\n  | \"top-to-bottom\"\n  | \"bottom-to-top\"\n  | \"left-to-right\"\n  | \"right-to-left\";\n\ninterface BlurredBackgroundProps {\n  layers?: number;\n  maxBlur?: number;\n  direction?: BlurDirection;\n  className?: string;\n}\n\nexport function BlurredBackground({\n  layers = 10,\n  maxBlur = 10,\n  direction = \"bottom-to-top\",\n  className,\n}: BlurredBackgroundProps = {}) {\n  return (\n    <div\n      className={`pointer-events-none absolute inset-0 -z-10 h-full w-full ${className || \"\"}`}\n    >\n      {Array.from({ length: layers }).map((_, index) => {\n        const blurAmount = (index / (layers - 1)) ** 2 * maxBlur;\n        const startPercent = (index / layers) * 100;\n        const endPercent = ((index + 1) / layers) * 100;\n\n        let gradientDirection: string;\n        switch (direction) {\n          case \"top-to-bottom\":\n            gradientDirection = \"to bottom\";\n            break;\n          case \"left-to-right\":\n            gradientDirection = \"to right\";\n            break;\n          case \"right-to-left\":\n            gradientDirection = \"to left\";\n            break;\n          default: // bottom-to-top\n            gradientDirection = \"to top\";\n        }\n\n        return (\n          <div\n            key={index}\n            className={`absolute inset-0 w-full ${className || \"\"}`}\n            style={{\n              backdropFilter: `blur(${blurAmount.toFixed(6)}px)`,\n              WebkitBackdropFilter: `blur(${blurAmount.toFixed(6)}px)`,\n              maskImage: `linear-gradient(${gradientDirection}, rgba(0, 0, 0, 0) ${startPercent}%, rgb(0, 0, 0) ${endPercent}%)`,\n              WebkitMaskImage: `linear-gradient(${gradientDirection}, rgba(0, 0, 0, 0) ${startPercent}%, rgb(0, 0, 0) ${endPercent}%)`,\n              zIndex: index + 1,\n            }}\n          />\n        );\n      })}\n    </div>\n  );\n}\n",
+      "type": "registry:component",
+      "target": "components/ui/aevr/blurred-background.tsx"
+    }
+  ]
+}

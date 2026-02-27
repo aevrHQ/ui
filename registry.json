@@ -455,6 +455,60 @@
           "target": "components/blocks/multistep-demo.tsx"
         }
       ]
+    },
+    {
+      "name": "settings-card",
+      "type": "registry:component",
+      "title": "Settings Card",
+      "description": "A settings card layout component.",
+      "files": [
+        {
+          "path": "registry/lagos/ui/settings-card.tsx",
+          "type": "registry:component",
+          "target": "components/ui/aevr/settings-card.tsx"
+        }
+      ]
+    },
+    {
+      "name": "settings-card-demo",
+      "type": "registry:block",
+      "title": "Settings Card Demo",
+      "description": "A demo for the settings card component.",
+      "registryDependencies": ["settings-card"],
+      "files": [
+        {
+          "path": "registry/lagos/blocks/settings-card-demo.tsx",
+          "type": "registry:block",
+          "target": "components/blocks/settings-card-demo.tsx"
+        }
+      ]
+    },
+    {
+      "name": "blurred-background",
+      "type": "registry:component",
+      "title": "Blurred Background",
+      "description": "A directionally blurred background component.",
+      "files": [
+        {
+          "path": "registry/lagos/ui/blurred-background.tsx",
+          "type": "registry:component",
+          "target": "components/ui/aevr/blurred-background.tsx"
+        }
+      ]
+    },
+    {
+      "name": "blurred-background-demo",
+      "type": "registry:block",
+      "title": "Blurred Background Demo",
+      "description": "A demo for the blurred background component.",
+      "registryDependencies": ["blurred-background"],
+      "files": [
+        {
+          "path": "registry/lagos/blocks/blurred-background-demo.tsx",
+          "type": "registry:block",
+          "target": "components/blocks/blurred-background-demo.tsx"
+        }
+      ]
     }
   ]
 }
